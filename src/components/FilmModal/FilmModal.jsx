@@ -1,18 +1,22 @@
-import { CircleX, Volume2Icon, VolumeOff } from 'lucide-react'
-import styles from './film-modal.module.scss'
 import { useEffect, useRef, useState } from 'react'
 import { FormatSeconds } from '../../utils/SecondsFormat'
+import { CircleX, Repeat, Volume2Icon, VolumeOff } from 'lucide-react'
+import styles from './film-modal.module.scss'
 
 export const FilmModal = ({ activeFilm, setIsModal }) => {
   const [isMuted, setIsMuted] = useState(true)
   const [duration, setDuration] = useState(0)
+  const [currentTime, setCurrentTime] = useState(0)
   const [progress, setProgress] = useState(0)
+  // const [isPlaying, setIsPlaying] = useState(false)
 
   const videoRef = useRef()
 
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.play()
+
+      // setIsPlaying(true)
     }
   }, [])
 
@@ -28,6 +32,14 @@ export const FilmModal = ({ activeFilm, setIsModal }) => {
 
   const timeUpdate = (e) => {
     setProgress((e.target.currentTime / e.target.duration) * 100)
+    const { minutes, seconds } = FormatSeconds(e.target.currentTime)
+    setCurrentTime(
+      `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`,
+    )
+
+    if (e.target.currentTime == e.target.duration) {
+      videoRef.current.currentTime = 0
+    }
   }
 
   return (
@@ -39,15 +51,21 @@ export const FilmModal = ({ activeFilm, setIsModal }) => {
         <div className={styles['film--modal__body']}>
           <div className={styles['film--modal__video']}>
             <video
+              poster={activeFilm.posterUrl}
               onLoadedMetadata={handlerDuration}
               muted={isMuted}
               ref={videoRef}
               src={activeFilm.trailerUrl}
               onTimeUpdate={timeUpdate}
             ></video>
+            {/* <div className={styles['repeat']}>{!isPlaying && <Repeat />}</div> */}
+
             <div className={styles['progress']} style={{ width: progress + '%' }}></div>
             <div className={styles['film--modal__video-footer']}>
-              {duration}
+              <p>
+                {currentTime} / {duration}
+              </p>
+
               {isMuted ? <VolumeOff onClick={volumeOff} /> : <Volume2Icon onClick={volumeOff} />}
             </div>
           </div>
