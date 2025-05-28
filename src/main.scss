@@ -1,0 +1,39 @@
+@use './_styles/reset';
+@use './_styles/colors';
+@use './_styles/fonts';
+
+body {
+  background-color: var(--bg-color);
+  color: var(--white-text-color);
+  overflow-x: hidden;
+}
+
+.wrapper {
+  display: flex;
+  align-items: start;
+  max-width: 1800px;
+  margin: 0 auto;
+  width: 100%;
+  justify-content: space-between;
+  max-width: 1920px;
+}
+
+.content {
+  width: calc(100% - 13%);
+  padding: 20px;
+}
+
+*::-webkit-scrollbar {
+  width: 4px; /* ширина всей полосы прокрутки */
+}
+
+*::-webkit-scrollbar-track {
+  background: #191a42; /* цвет зоны отслеживания */
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--yellow-color);
+
+  border-radius: 0px; /* округлось бегунка */
+  // border: 3px solid orange; /* отступ вокруг бегунка */
+}

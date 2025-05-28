@@ -1,0 +1,25 @@
+.category {
+  margin: 20px 0;
+  h1 {
+    font-weight: bold;
+    font-size: 22px;
+  }
+  .category--items {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-wrap: wrap;
+    .category--item {
+      margin: 10px 15px;
+      cursor: pointer;
+      img {
+        margin: 15px 0;
+        border-radius: 8px;
+      }
+      h2 {
+        font-weight: bold;
+        font-size: 16px;
+      }
+    }
+  }
+}

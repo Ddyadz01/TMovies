@@ -1,0 +1,104 @@
+.film--modal {
+  position: fixed;
+  top: 50%;
+  height: 100%;
+  width: 100%;
+  left: 50%;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+  background-color: rgba(8, 8, 8, 0.932);
+  padding: 20px 0;
+  &__content {
+    width: 65%;
+    border-radius: 12px;
+    background-color: var(--bg-color);
+    margin: 0 auto;
+    overflow-y: scroll;
+    height: 100%;
+    .film--modal__header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      svg {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+        z-index: 1;
+        transition: 0.3s;
+        &:hover {
+          color: var(--yellow-color);
+        }
+      }
+    }
+    .film--modal__body {
+      .film--modal__video {
+        position: relative;
+        overflow: hidden;
+        .progress {
+          height: 2px;
+          background-color: var(--yellow-color);
+          transition: 0.3s;
+          position: absolute;
+          bottom: 2px;
+        }
+        .film--modal__video-footer {
+          left: 0;
+          position: absolute;
+          bottom: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          padding: 0 20px;
+          font-size: 16px;
+          font-weight: bold;
+          svg {
+            cursor: pointer;
+          }
+        }
+
+        video {
+          width: 100%;
+        }
+      }
+
+      .film--modal__info {
+        padding: 10px 20px;
+        .film--modal__title {
+          margin: 5px 0;
+          h1 {
+            font-weight: bold;
+            font-size: 24px;
+          }
+        }
+        .film--modal__more {
+          .film--modal__ganres {
+            margin: 10px 0;
+            display: flex;
+            p {
+              margin-right: 3px;
+              font-size: 14px;
+              color: #a7a1ff;
+            }
+          }
+          .film--modal__country {
+            margin: 10px 0;
+            color: #a7a1ff;
+          }
+          .film--modal__description {
+            h1 {
+              color: white;
+              font-weight: bold;
+              font-size: 20px;
+              margin-bottom: 5px;
+            }
+            margin: 20px 0;
+            color: #a7a1ff;
+          }
+        }
+      }
+    }
+  }
+}
