@@ -7,7 +7,7 @@
   z-index: 10;
   transform: translate(-50%, -50%);
   background-color: rgba(8, 8, 8, 0.932);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
   padding: 20px 0;
   &__content {
     width: 65%;
@@ -81,6 +81,7 @@
         padding: 10px 20px;
         .film--modal__title {
           margin: 5px 0;
+
           h1 {
             font-weight: bold;
             font-size: 24px;
@@ -99,6 +100,17 @@
           .film--modal__country {
             margin: 10px 0;
             color: #a7a1ff;
+            display: flex;
+            align-items: center;
+            .film--modal__age {
+              margin-left: 5px;
+              font-size: 14px;
+              border: 1px solid #a7a1ff;
+              color: #a7a1ff;
+              // font-weight: bold;
+              padding: 5px 8px;
+              border-radius: 5px;
+            }
           }
           .film--modal__description {
             h1 {

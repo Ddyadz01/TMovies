@@ -6,7 +6,7 @@ import styles from './film-modal.module.scss'
 export const FilmModal = ({ activeFilm, setIsModal }) => {
   const [isMuted, setIsMuted] = useState(true)
   const [duration, setDuration] = useState(0)
-  const [currentTime, setCurrentTime] = useState(0)
+  const [currentTime, setCurrentTime] = useState('00:00')
   const [progress, setProgress] = useState(0)
   // const [isPlaying, setIsPlaying] = useState(false)
 
@@ -51,7 +51,7 @@ export const FilmModal = ({ activeFilm, setIsModal }) => {
         <div className={styles['film--modal__body']}>
           <div className={styles['film--modal__video']}>
             <video
-              poster={activeFilm.posterUrl}
+              // poster={activeFilm.posterUrl}
               onLoadedMetadata={handlerDuration}
               muted={isMuted}
               ref={videoRef}
@@ -78,12 +78,13 @@ export const FilmModal = ({ activeFilm, setIsModal }) => {
               <div className={styles['film--modal__ganres']}>
                 {activeFilm.ganres.map((ganre, idx) => (
                   <p>
-                    {ganre} {idx + 1 != activeFilm.ganres.length && '●'}
+                    {ganre} {idx + 1 != activeFilm.ganres.length && '∙'}
                   </p>
                 ))}
               </div>
               <div className={styles['film--modal__country']}>
-                {activeFilm.country + ' ● ' + activeFilm.year}
+                {activeFilm.country + ' ∙ ' + activeFilm.year + ' ∙ '}
+                <div className={styles['film--modal__age']}>{activeFilm.minAge + ' +'}</div>
               </div>
               <div className={styles['film--modal__description']}>
                 <h1>Описание</h1>
