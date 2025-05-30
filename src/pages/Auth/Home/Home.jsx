@@ -1,18 +1,36 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
+import { useSearchParams } from 'react-router-dom'
+
 import { FILMSLIST } from '../../../../constants'
-import { FilmModal } from '../../../components/FilmModal/FilmModal'
-import { Slider } from '../../../components/Index'
+
+import { FilmModal, Slider } from '../../../components/Index'
 
 import styles from './home.module.scss'
 
 export const Home = () => {
   const [isModal, setIsModal] = useState(false)
   const [activeMovie, setActiveMovie] = useState({})
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const clickFilm = (movie) => {
     setActiveMovie(movie)
-    setIsModal((prev) => !prev)
+    setIsModal(true)
+    setSearchParams({
+      id: movie.id,
+      movie: movie.title,
+    })
   }
+
+  useEffect(() => {
+    const paramTitle = searchParams.get('movie')
+    const paramId = searchParams.get('id')
+    if (paramTitle) {
+      const movie = FILMSLIST.find((movie) => movie.id == paramId)
+      clickFilm(movie)
+    }
+  }, [])
+
   return (
     <>
       <div>
@@ -33,7 +51,13 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      {isModal && <FilmModal setIsModal={setIsModal} activeFilm={activeMovie} />}
+      {isModal && (
+        <FilmModal
+          setSearchParams={setSearchParams}
+          setIsModal={setIsModal}
+          activeFilm={activeMovie}
+        />
+      )}
     </>
   )
 }

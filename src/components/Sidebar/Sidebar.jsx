@@ -1,6 +1,8 @@
 import { Link, useLocation } from 'react-router-dom'
-import styles from './sidebar.module.scss'
+
 import { NAV } from '../../../constants.jsx'
+
+import styles from './sidebar.module.scss'
 
 export const Sidebar = () => {
   const { pathname } = useLocation()

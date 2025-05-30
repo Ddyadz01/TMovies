@@ -1,22 +1,22 @@
 import { useEffect, useRef, useState } from 'react'
+
+import { CircleX, Volume2Icon, VolumeOff } from 'lucide-react'
+
 import { FormatSeconds } from '../../utils/SecondsFormat'
-import { CircleX, Repeat, Volume2Icon, VolumeOff } from 'lucide-react'
+
 import styles from './film-modal.module.scss'
 
-export const FilmModal = ({ activeFilm, setIsModal }) => {
+export const FilmModal = ({ activeFilm, setSearchParams, setIsModal }) => {
   const [isMuted, setIsMuted] = useState(true)
-  const [duration, setDuration] = useState(0)
+  // const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState('00:00')
   const [progress, setProgress] = useState(0)
-  // const [isPlaying, setIsPlaying] = useState(false)
 
   const videoRef = useRef()
 
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.play()
-
-      // setIsPlaying(true)
     }
   }, [])
 
@@ -25,10 +25,10 @@ export const FilmModal = ({ activeFilm, setIsModal }) => {
     setIsMuted((prev) => !prev)
   }
 
-  const handlerDuration = () => {
-    const { minutes, seconds } = FormatSeconds(videoRef.current.duration)
-    setDuration(`${minutes}:${seconds}`)
-  }
+  // const handlerDuration = () => {
+  //   const { minutes, seconds } = FormatSeconds(videoRef.current.duration)
+  //   setDuration(`${minutes}:${seconds}`)
+  // }
 
   const timeUpdate = (e) => {
     setProgress((e.target.currentTime / e.target.duration) * 100)
@@ -42,17 +42,22 @@ export const FilmModal = ({ activeFilm, setIsModal }) => {
     }
   }
 
+  const closeHandler = () => {
+    setSearchParams({})
+    setIsModal((prev) => !prev)
+  }
+
   return (
     <div className={styles['film--modal']}>
       <div className={styles['film--modal__content']}>
         <div className={styles['film--modal__header']}>
-          <CircleX onClick={() => setIsModal((prev) => !prev)} />
+          <CircleX onClick={closeHandler} />
         </div>
         <div className={styles['film--modal__body']}>
           <div className={styles['film--modal__video']}>
             <video
               // poster={activeFilm.posterUrl}
-              onLoadedMetadata={handlerDuration}
+              // onLoadedMetadata={handlerDuration}
               muted={isMuted}
               ref={videoRef}
               src={activeFilm.trailerUrl}
@@ -62,9 +67,9 @@ export const FilmModal = ({ activeFilm, setIsModal }) => {
 
             <div className={styles['progress']} style={{ width: progress + '%' }}></div>
             <div className={styles['film--modal__video-footer']}>
-              <p>
+              {/* <p>
                 {currentTime} / {duration}
-              </p>
+              </p> */}
 
               {isMuted ? <VolumeOff onClick={volumeOff} /> : <Volume2Icon onClick={volumeOff} />}
             </div>
