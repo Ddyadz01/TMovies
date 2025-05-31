@@ -8,9 +8,9 @@ import styles from './film-modal.module.scss'
 
 export const FilmModal = ({ activeFilm, setSearchParams, setIsModal }) => {
   const [isMuted, setIsMuted] = useState(true)
-  // const [duration, setDuration] = useState(0)
-  const [currentTime, setCurrentTime] = useState('00:00')
   const [progress, setProgress] = useState(0)
+  // const [duration, setDuration] = useState(0)
+  // const [currentTime, setCurrentTime] = useState('00:00')
 
   const videoRef = useRef()
 
@@ -32,14 +32,13 @@ export const FilmModal = ({ activeFilm, setSearchParams, setIsModal }) => {
 
   const timeUpdate = (e) => {
     setProgress((e.target.currentTime / e.target.duration) * 100)
-    const { minutes, seconds } = FormatSeconds(e.target.currentTime)
-    setCurrentTime(
-      `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`,
-    )
-
     if (e.target.currentTime == e.target.duration) {
       videoRef.current.currentTime = 0
     }
+    // const { minutes, seconds } = FormatSeconds(e.target.currentTime)
+    // setCurrentTime(
+    //   `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`,
+    // )
   }
 
   const closeHandler = () => {
@@ -53,6 +52,7 @@ export const FilmModal = ({ activeFilm, setSearchParams, setIsModal }) => {
         <div className={styles['film--modal__header']}>
           <CircleX onClick={closeHandler} />
         </div>
+
         <div className={styles['film--modal__body']}>
           <div className={styles['film--modal__video']}>
             <video

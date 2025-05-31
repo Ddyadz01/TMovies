@@ -128,3 +128,14 @@
     }
   }
 }
+
+@media (max-width: 600px) {
+  .film--modal {
+    padding: 0;
+    &__content {
+      width: 100%;
+      padding: 0;
+      background-color: rgb(3 4 26 / 22%);
+    }
+  }
+}
