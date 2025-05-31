@@ -59,6 +59,8 @@ export const FilmModal = ({ activeFilm, setSearchParams, setIsModal }) => {
               // poster={activeFilm.posterUrl}
               // onLoadedMetadata={handlerDuration}
               muted={isMuted}
+              playsinline
+              playsInline={true}
               ref={videoRef}
               src={activeFilm.trailerUrl}
               onTimeUpdate={timeUpdate}

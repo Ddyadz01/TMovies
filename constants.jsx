@@ -60,7 +60,7 @@ export const FILMSLIST = [
     id: 2,
     title: 'Джокер',
     minAge: '16',
-    trailerUrl: '/videos/2.mp4',
+    trailerUrl: 'https://kinescope.io/embed/rgaD7QuQAh94E4jfZfrCXY',
     year: 2019,
     country: 'США',
     ganres: ['Драма', 'Криминал', 'Триллер'],
