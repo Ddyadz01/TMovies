@@ -11,6 +11,7 @@ export const FilmModal = ({ activeFilm, setSearchParams, setIsModal }) => {
   const [isMuted, setIsMuted] = useState(true)
   const [progress, setProgress] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
+  const location = window.location.hostname
   // const [duration, setDuration] = useState(0)
   // const [currentTime, setCurrentTime] = useState('00:00')
 
@@ -51,13 +52,26 @@ export const FilmModal = ({ activeFilm, setSearchParams, setIsModal }) => {
     setIsModal((prev) => !prev)
   }
 
+  const viewClick = () => {
+    if (videoRef.current.src != 'http://localhost:5173' + activeFilm.fullVideo) {
+      videoRef.current.src = activeFilm.fullVideo
+      videoRef.current.play()
+    }
+  }
+
   return (
     <>
       <title>{activeFilm.title}</title>
       <div className={styles['film--modal']}>
         <div className={styles['film--modal__content']}>
           <div className={styles['film--modal__header']}>
-            <CircleX onClick={closeHandler} />
+            <div className={styles['film--modal__header--btns']}>
+              <button onClick={viewClick}>Описание</button>
+              <button className={styles['active']}>Просмотр</button>
+            </div>
+            <div className={styles['film--modal__header--close']} onClick={closeHandler}>
+              <CircleX />
+            </div>
           </div>
 
           <div className={styles['film--modal__body']}>
