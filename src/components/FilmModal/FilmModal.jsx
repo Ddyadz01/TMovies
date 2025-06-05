@@ -38,7 +38,7 @@ export const FilmModal = ({ activeFilm, setSearchParams, setIsModal }) => {
       setIsPlaying(true)
     }
     setProgress((e.target.currentTime / e.target.duration) * 100)
-    if (e.target.currentTime == e.target.duration) {
+    if (e.target.currentTime === e.target.duration) {
       videoRef.current.currentTime = 0
     }
     // const { minutes, seconds } = FormatSeconds(e.target.currentTime)
@@ -81,7 +81,6 @@ export const FilmModal = ({ activeFilm, setSearchParams, setIsModal }) => {
                 // onLoadedMetadata={handlerDuration}
                 style={isPlaying ? {} : { background: 'black' }}
                 muted={isMuted}
-                playsinline
                 playsInline={true}
                 ref={videoRef}
                 src={activeFilm.trailerUrl}
@@ -107,7 +106,7 @@ export const FilmModal = ({ activeFilm, setSearchParams, setIsModal }) => {
               <div className={styles['film--modal__more']}>
                 <div className={styles['film--modal__ganres']}>
                   {activeFilm.ganres.map((ganre, idx) => (
-                    <p>
+                    <p key = {idx}>
                       {ganre} {idx + 1 != activeFilm.ganres.length && '∙'}
                     </p>
                   ))}
