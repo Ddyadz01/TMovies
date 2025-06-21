@@ -12,17 +12,23 @@
     .category--item {
       margin: 10px 15px;
       cursor: pointer;
-      img {
-        margin: 15px 0;
-        border-radius: 8px;
-        width: 180px;
-        height: 270px;
-      }
-      h2 {
-        font-weight: bold;
-        font-size: 16px;
-        max-width: 180px;
+    &:hover {
+      position: relative;
+    }
+      .category--item_content {
+        img {
+          margin: 15px 0;
+          border-radius: 8px;
+          width: 180px;
+          height: 270px;
+        }
+        h2 {
+          font-weight: bold;
+          font-size: 16px;
+          max-width: 180px;
+        }
       }
     }
+    
   }
 }

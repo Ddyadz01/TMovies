@@ -8,7 +8,7 @@
   transform: translate(-50%, -50%);
   background-color: rgb(3 4 26 / 55%);
   backdrop-filter: blur(10px);
-  padding: 20px 0;
+  padding: 10px 0 0 0;
   &__content {
     width: 65%;
     // border: 1px solid red;
@@ -32,8 +32,8 @@
         }
         button.active {
           margin-right: 20px;
-          color: var(--yellow-color);
-          border-bottom: 1px solid var(--yellow-color);
+          color: var(--accent-color);
+          border-bottom: 1px solid var(--accent-color);
         }
       }
       .film--modal__header--close {
@@ -42,7 +42,7 @@
           z-index: 1;
           transition: 0.3s;
           &:hover {
-            color: var(--yellow-color);
+            color: var(--accent-color);
           }
         }
       }
@@ -58,14 +58,15 @@
           left: 50%;
           transform: translate(-50%, -50%);
           cursor: pointer;
-          color: var(--yellow-color);
+          color: var(--accent-color);
           background-color: var(--bg-color);
           padding: 5px;
           border-radius: 8px;
         }
         .progress {
           height: 2px;
-          background-color: var(--yellow-color);
+          background-color: var(--accent-color);
+          overflow: hidden;
           transition: 0.3s;
           position: absolute;
           bottom: 2px;
