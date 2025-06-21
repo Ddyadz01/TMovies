@@ -1,4 +1,4 @@
-import { useEffect,  useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export  const useVideoModal = (activeFilm, setSearchParams,setIsModal, videoRef ) => {
   const [isMuted, setIsMuted] = useState(true)
@@ -32,7 +32,6 @@ export  const useVideoModal = (activeFilm, setSearchParams,setIsModal, videoRef 
   const closeHandler = () => {
     setSearchParams({})
     setIsModal((prev) => !prev)
-    console.log('f')
   }
 
   const viewClick = () => {

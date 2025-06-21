@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 
@@ -7,15 +7,17 @@ import { FILMSLIST } from '../../../../constants';
 import { FilmModal, Slider } from '../../../components/Index';
 
 import styles from './home.module.scss';
+import { useCurrentFilm } from '../../../store/store.js';
 
 export const Home = () => {
   const [isModal, setIsModal] = useState(false);
-  const [activeMovie, setActiveMovie] = useState({});
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const {  updateCurrentMovie } = useCurrentFilm((state) => state)
 
 
   const clickFilm = (movie) => {
-    setActiveMovie(movie);
+    updateCurrentMovie(movie)
     setIsModal(true);
     setSearchParams({
       id: movie.id, movie: movie.title,
@@ -23,13 +25,12 @@ export const Home = () => {
   };
 
   useEffect(() => {
-    const paramTitle = searchParams.get('movie');
     const paramId = searchParams.get('id');
     if (paramId) {
       const movie = FILMSLIST.find((movie) => movie.id == paramId);
       clickFilm(movie);
     } else {
-      setSearchParams({ });
+      setSearchParams({});
     }
   }, []);
 
@@ -51,7 +52,6 @@ export const Home = () => {
                      alt="" />
                 <h2>{movie.title}</h2>
               </div>
-
             </div>))}
         </div>
       </div>
@@ -59,7 +59,6 @@ export const Home = () => {
     {isModal && (<FilmModal
       setSearchParams={setSearchParams}
       setIsModal={setIsModal}
-      activeFilm={activeMovie}
     />)}
   </>);
 };

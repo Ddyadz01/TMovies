@@ -4,4 +4,17 @@
   border-radius: 8px;
   display: flex;
   align-items: center;
+  font-size: 16px;
+  border: 1px solid var(--accent-color);
+  transition: .3s;
+
+  //font-weight: bold;
+  svg {
+    width: 18px;
+    margin:  0 5px;
+  }
+  &:hover {
+    background: transparent;
+    color: #a7a1ff;
+  }
 }

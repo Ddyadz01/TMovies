@@ -7,12 +7,19 @@ import { useVideoModal } from '../../hooks/useVideoModal';
 
 import { FormatSeconds } from '../../utils/SecondsFormat'
 
-import { CircleX, PlayIcon, Volume2Icon, VolumeOff } from 'lucide-react';
-import styles from './film-modal.module.scss'
+import { CircleX, MonitorPlay, PlayIcon, Volume2Icon, VolumeOff, X } from 'lucide-react';
+import { ModalHeader } from './ModalHeader.jsx';
+import { ModalVideo } from './ModalVideo.jsx';
+import { ModalFilmInfo } from './ModalFilmInfo.jsx';
 
-export const FilmModal = ({ activeFilm, setSearchParams, setIsModal }) => {
+import styles from './film-modal.module.scss'
+import { useCurrentFilm } from '../../store/store.js';
+
+export const FilmModal = ({ setSearchParams, setIsModal }) => {
 
   const videoRef = useRef(null)
+
+  const {  currentFilm } = useCurrentFilm((state) => state)
 
   const {
     isMuted,
@@ -25,69 +32,24 @@ export const FilmModal = ({ activeFilm, setSearchParams, setIsModal }) => {
     volumeOff,
     timeUpdate,
     location
-  } = useVideoModal(activeFilm, setSearchParams,setIsModal, videoRef)
+  } = useVideoModal(currentFilm, setSearchParams,setIsModal, videoRef)
 
   return (
     <>
-      <title>{activeFilm.title}</title>
+      <title>{'TMovie' + ' | ' + currentFilm.title}</title>
       <div className={styles['film--modal']}>
         <div className={styles['film--modal__content']}>
-          <div className={styles['film--modal__header']}>
-            <div className={styles['film--modal__header--btns']}>
-              <button onClick={viewClick}>Описание</button>
-              <button className={styles['active']}>Просмотр</button>
-            </div>
-            <div className={styles['film--modal__header--close']} onClick={closeHandler}>
-              <CircleX />
-            </div>
-          </div>
-
+          <ModalHeader  closeHandler={closeHandler} />
           <div className={styles['film--modal__body']}>
-            <div className={styles['film--modal__video']}>
-              <video
+            <ModalVideo videoRef={videoRef}
 
-                style={isPlaying ? {} : { background: 'black' }}
-                muted={isMuted}
-                playsInline={true}
-                ref={videoRef}
-                src={activeFilm.trailerUrl}
-                onTimeUpdate={timeUpdate}
-              ></video>
-              {!isPlaying && <Loader />}
-
-              <div className={styles['progress']} style={{ width: progress + '%' }}></div>
-              <div className={styles['film--modal__video-footer']}>
-
-                {isMuted ? <VolumeOff onClick={volumeOff} /> : <Volume2Icon onClick={volumeOff} />}
-              </div>
-            </div>
-
-            <div className={styles['film--modal__info']}>
-              <div className={styles['film--modal__title']}>
-                <h1>{activeFilm.title}</h1>
-              </div>
-              <div className={styles['film--modal__more']}>
-                <div className={styles['film--modal__ganres']}>
-                  {activeFilm.ganres.map((ganre, idx) => (
-                    <p key = {idx}>
-                      {ganre} {idx + 1 != activeFilm.ganres.length && '∙'}
-                    </p>
-                  ))}
-                </div>
-                <div className={styles['film--modal__country']}>
-                  {activeFilm.country + ' ∙ ' + activeFilm.year + ' ∙ '}
-                  <div className={styles['film--modal__age']}>{activeFilm.minAge + ' +'}</div>
-                </div>
-                <Button>
-                  <PlayIcon />
-                  Смотреть
-                </Button>
-                <div className={styles['film--modal__description']}>
-                  <h1>Описание</h1>
-                  {activeFilm.description}
-                </div>
-              </div>
-            </div>
+                        isPlaying={isPlaying}
+                        isMuted={isMuted}
+                        progress={progress}
+                        timeUpdate={timeUpdate}
+                        volumeOff={volumeOff}
+            />
+            <ModalFilmInfo  />
           </div>
         </div>
       </div>
