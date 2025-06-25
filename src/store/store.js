@@ -2,8 +2,10 @@ import { create } from 'zustand'
 
 
 export const useCurrentFilm = create((set) => ({
-  currentFilm: {},
-  updateCurrentMovie: (newMovie) => set(() => ({ currentFilm: newMovie })),
+  currentMovie: {},
+  isFullMovie: false,
+  updateCurrentMovie: (newMovie) => set(() => ({ currentMovie: newMovie })),
+  updateIsFullMovie: (boolean) => set(() => ({ isFullMovie: boolean })),
 }))
 
 

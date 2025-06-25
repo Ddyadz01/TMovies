@@ -62,6 +62,7 @@ export const FILMSLIST = [
     title: 'Джокер',
     minAge: '16',
     trailerUrl: '/videos/2.mp4',
+    fullVideo: '/videos/1.mp4',
     year: 2019,
     country: 'США',
     ganres: ['Драма', 'Криминал', 'Триллер'],

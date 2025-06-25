@@ -19,7 +19,7 @@ export const FilmModal = ({ setSearchParams, setIsModal }) => {
 
   const videoRef = useRef(null)
 
-  const {  currentFilm } = useCurrentFilm((state) => state)
+  const {  currentMovie } = useCurrentFilm((state) => state)
 
   const {
     isMuted,
@@ -32,24 +32,24 @@ export const FilmModal = ({ setSearchParams, setIsModal }) => {
     volumeOff,
     timeUpdate,
     location
-  } = useVideoModal(currentFilm, setSearchParams,setIsModal, videoRef)
+  } = useVideoModal(setSearchParams,setIsModal, videoRef)
 
   return (
     <>
-      <title>{'TMovie' + ' | ' + currentFilm.title}</title>
+      <title>{'TMovie' + ' | ' + currentMovie.title}</title>
       <div className={styles['film--modal']}>
         <div className={styles['film--modal__content']}>
           <ModalHeader  closeHandler={closeHandler} />
           <div className={styles['film--modal__body']}>
-            <ModalVideo videoRef={videoRef}
-
-                        isPlaying={isPlaying}
-                        isMuted={isMuted}
-                        progress={progress}
-                        timeUpdate={timeUpdate}
-                        volumeOff={volumeOff}
+            <ModalVideo
+              videoRef={videoRef}
+              isPlaying={isPlaying}
+              isMuted={isMuted}
+              progress={progress}
+              timeUpdate={timeUpdate}
+              volumeOff={volumeOff}
             />
-            <ModalFilmInfo  />
+            <ModalFilmInfo videoRef = {videoRef} />
           </div>
         </div>
       </div>

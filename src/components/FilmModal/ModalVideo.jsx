@@ -4,7 +4,7 @@ import { Volume2Icon, VolumeOff } from 'lucide-react';
 import { useCurrentFilm } from '../../store/store.js';
 
 export const ModalVideo = ({isPlaying, isMuted, videoRef, timeUpdate, progress, volumeOff}) => {
-  const {currentFilm} = useCurrentFilm(state => state)
+  const {currentMovie} = useCurrentFilm(state => state)
   return(
     <div className={styles['film--modal__video']}>
       <video
@@ -12,7 +12,7 @@ export const ModalVideo = ({isPlaying, isMuted, videoRef, timeUpdate, progress, 
         muted={isMuted}
         playsInline={true}
         ref={videoRef}
-        src={currentFilm.trailerUrl}
+        src={currentMovie.trailerUrl}
         onTimeUpdate={timeUpdate}
       ></video>
       {!isPlaying && <Loader />}
