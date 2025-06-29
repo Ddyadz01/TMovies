@@ -86,8 +86,8 @@
 * Created with https://www.css-gradient.com
 * Gradient link: https://www.css-gradient.com/?c1=ffffff00&c2=6944df99&gt=l&gd=dtt
 */
-background: rgba(255, 255, 255, 0.0);
-background: linear-gradient(180deg, rgba(255, 255, 255, 0.0), rgba(105, 68, 223, 0.6));
+// background: rgba(255, 255, 255, 0.0);
+// background: linear-gradient(180deg, rgba(255, 255, 255, 0.0), rgba(105, 68, 223, 0.6));
      
           .player--icon {
             cursor: pointer;
@@ -100,6 +100,7 @@ background: linear-gradient(180deg, rgba(255, 255, 255, 0.0), rgba(105, 68, 223,
             span {
               margin: 0 10px;
               font-size: 14px;
+              width: 35px;
             }
             .player--progress {
               width: 100%;
