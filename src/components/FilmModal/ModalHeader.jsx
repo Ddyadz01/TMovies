@@ -1,9 +1,9 @@
 import styles from './film-modal.module.scss'
 import { X } from 'lucide-react';
-import { useCurrentFilm } from '../../store/store.js';
+import { useMovieStore } from '../../store/store.js';
 
 export const ModalHeader = ({ closeHandler}) => {
-  const {currentMovie} = useCurrentFilm(state => state)
+  const {currentMovie} = useMovieStore(state => state)
   return (
     <div className={styles['film--modal__header']}>
       <div className={styles['film--modal__header--btns']}>

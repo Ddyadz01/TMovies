@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useCurrentFilm } from '../store/store.js';
+import { useMovieStore } from '../store/store';
 
 export  const useVideoModal = (setSearchParams,setIsModal, videoRef ) => {
   const [isMuted, setIsMuted] = useState(true)
   const [progress, setProgress] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
-  const {  currentMovie } = useCurrentFilm((state) => state);
   const location = window.location.hostname
+
+  const {updateIsFullMovie} = useMovieStore()
 
 
   useEffect(() => {
@@ -21,7 +22,6 @@ export  const useVideoModal = (setSearchParams,setIsModal, videoRef ) => {
   }
 
   const timeUpdate = (e) => {
-
     if (!videoRef.current.paused) {
       setIsPlaying(true)
     }
@@ -34,23 +34,18 @@ export  const useVideoModal = (setSearchParams,setIsModal, videoRef ) => {
   const closeHandler = () => {
     setSearchParams({})
     setIsModal((prev) => !prev)
+
+    updateIsFullMovie(false)
+
   }
 
-  const viewClick = () => {
-    if (videoRef.current.src != 'http://localhost:5173' + currentMovie.fullVideo) {
-      videoRef.current.src = currentMovie.fullVideo
-      videoRef.current.play()
-    }
-  }
+
   return {
     videoRef,
     isMuted,
     progress,
     isPlaying,
-    setIsMuted,
-    setProgress,
     closeHandler,
-    viewClick,
     volumeOff,
     timeUpdate,
     location

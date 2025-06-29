@@ -7,13 +7,13 @@ import { FILMSLIST } from '../../../../constants';
 import { FilmModal, Slider } from '../../../components/Index';
 
 import styles from './home.module.scss';
-import { useCurrentFilm } from '../../../store/store.js';
+import { useMovieStore } from '../../../store/store.js';
 
 export const Home = () => {
   const [isModal, setIsModal] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const {  updateCurrentMovie } = useCurrentFilm((state) => state)
+  const {  updateCurrentMovie } = useMovieStore((state) => state)
 
 
   const clickFilm = (movie) => {

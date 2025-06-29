@@ -74,6 +74,50 @@
           position: absolute;
           bottom: 2px;
         }
+        .player {
+          display: flex;
+          position: absolute;
+          bottom: 0;
+          justify-content: space-between;
+          width: 100%;
+          padding: 10px;
+          align-items: center;
+/*
+* Created with https://www.css-gradient.com
+* Gradient link: https://www.css-gradient.com/?c1=ffffff00&c2=6944df99&gt=l&gd=dtt
+*/
+background: rgba(255, 255, 255, 0.0);
+background: linear-gradient(180deg, rgba(255, 255, 255, 0.0), rgba(105, 68, 223, 0.6));
+     
+          .player--icon {
+            cursor: pointer;
+          }
+          .player--content {
+            width: 90%;
+            display: flex ;
+            align-items: center;
+            justify-content: space-between;
+            span {
+              margin: 0 10px;
+              font-size: 14px;
+            }
+            .player--progress {
+              width: 100%;
+              height: 5px;
+              border-radius: 10px;
+              // overflow: hidden;
+              background: var( --text-blue-color);
+              .player--progress_bar {
+                background-color: var(--accent-color);
+                transition: .3s;
+                height: 100%;
+                border-radius: 10px;
+              }
+            }
+          }
+         
+        }
+
         .film--modal__video-footer {
           left: 0;
           position: absolute;
@@ -113,19 +157,19 @@
             p {
               margin-right: 3px;
               font-size: 14px;
-              color: #a7a1ff;
+              color: var( --text-blue-color);
             }
           }
           .film--modal__country {
             margin: 10px 0;
-            color: #a7a1ff;
+            color: var( --text-blue-color);
             display: flex;
             align-items: center;
             .film--modal__age {
               margin-left: 5px;
               font-size: 14px;
-              border: 1px solid #a7a1ff;
-              color: #a7a1ff;
+              border: 1px solid var( --text-blue-color);
+              color: var( --text-blue-color);
               // font-weight: bold;
               padding: 5px 8px;
               border-radius: 5px;
@@ -142,7 +186,7 @@
               margin-bottom: 5px;
             }
             margin: 20px 0;
-            color: #a7a1ff;
+            color: var( --text-blue-color);
           }
         }
       }

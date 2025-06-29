@@ -4,27 +4,19 @@ export const FormatSeconds = (total) => {
   const seconds = Math.floor(secondsFull % 60)
 
   if(minutes < 10 & seconds < 10 ){
-     return {
-       formatedTime:  `0${minutes}:0${seconds}`,
-     }
+     return `0${minutes}:0${seconds}`
   }
 
-  if(minutes < 10 & seconds > 10 ){
-    return {
-      formatedTime:  `0${minutes}:${seconds}`,
-    }
+  if(minutes < 10 & seconds >= 10 ){
+    return `0${minutes}:${seconds}`
   }
 
   if(minutes > 10 & seconds > 10 ){
-    return {
-      formatedTime:  `${minutes}:${seconds}`,
-    }
+    return `${minutes}:${seconds}`
   }
 
   if(minutes > 10 & seconds < 10 ){
-    return {
-      formatedTime:  `${minutes}:0${seconds}`,
-    }
+    return `${minutes}:0${seconds}`
   }
 
 

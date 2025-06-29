@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 
 
-export const useCurrentFilm = create((set) => ({
+export const useMovieStore = create((set) => ({
   currentMovie: {},
   isFullMovie: false,
   updateCurrentMovie: (newMovie) => set(() => ({ currentMovie: newMovie })),

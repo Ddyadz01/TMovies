@@ -1,27 +1,24 @@
 import styles from './film-modal.module.scss';
 import { Button } from '../Button/Button.jsx';
 import { MonitorPlay } from 'lucide-react';
-import { useCurrentFilm } from '../../store/store.js';
+import { useMovieStore } from '../../store/store.js';
 
 export const ModalFilmInfo = ({videoRef}) => {
-  const {  currentMovie,  isFullMovie, updateIsFullMovie } = useCurrentFilm((state) => state)
+  const {  currentMovie,  isFullMovie, updateIsFullMovie } = useMovieStore((state) => state)
 
 
   const handleFullMovie = () => {
-    // if(videoRef.current.src === 'http://localhost:5173' + currentMovie.fullVideo) return
-    // console.log(!isFullMovie)
+    videoRef.current.pause()
+
     if(isFullMovie) {
-      videoRef.current.pause()
       videoRef.current.src = currentMovie.trailerUrl
-      videoRef.current.play()
       updateIsFullMovie(false)
     } else {
       updateIsFullMovie(true)
-      videoRef.current.pause()
       videoRef.current.src = currentMovie.fullVideo
-      videoRef.current.play()
     }
 
+    videoRef.current.play()
   }
   return (
     <div className={styles['film--modal__info']}>
