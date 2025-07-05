@@ -4,10 +4,11 @@ import { MonitorPlay } from 'lucide-react';
 import { useMovieStore } from '../../store/store.js';
 
 export const ModalFilmInfo = ({videoRef}) => {
-  const {  currentMovie,  isFullMovie, updateIsFullMovie } = useMovieStore((state) => state)
-
+  const { currentMovie, isFullMovie, updateIsFullMovie } = useMovieStore((state) => state)
 
   const handleFullMovie = () => {
+    if (!videoRef.current) return;
+    
     videoRef.current.pause()
 
     if(isFullMovie) {
@@ -18,8 +19,9 @@ export const ModalFilmInfo = ({videoRef}) => {
       videoRef.current.src = currentMovie.fullVideo
     }
 
-    videoRef.current.play()
+    videoRef.current.play().catch(console.error);
   }
+  
   return (
     <div className={styles['film--modal__info']}>
       <div className={styles['film--modal__title']}>
@@ -27,9 +29,9 @@ export const ModalFilmInfo = ({videoRef}) => {
       </div>
       <div className={styles['film--modal__more']}>
         <div className={styles['film--modal__ganres']}>
-          {currentMovie.ganres.map((ganre, idx) => (
-            <p key = {idx}>
-              {ganre} {idx + 1 != currentMovie.ganres.length && '∙'}
+          {currentMovie.ganres?.map((ganre, idx) => (
+            <p key={idx}>
+              {ganre} {idx + 1 !== currentMovie.ganres.length && '∙'}
             </p>
           ))}
         </div>
@@ -37,9 +39,9 @@ export const ModalFilmInfo = ({videoRef}) => {
           {currentMovie.country + ' ∙ ' + currentMovie.year + ' ∙ '}
           <div className={styles['film--modal__age']}>{currentMovie.minAge + ' +'}</div>
         </div>
-        <Button clickFn= {handleFullMovie}>
+        <Button clickFn={handleFullMovie}>
           <MonitorPlay />
-          {isFullMovie ?  'Смотреть трейлер' : 'Смотреть фильм'}
+          {isFullMovie ? 'Смотреть трейлер' : 'Смотреть фильм'}
         </Button>
         <div className={styles['film--modal__description']}>
           <h1>Описание</h1>
