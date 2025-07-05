@@ -1,10 +1,28 @@
 .slider {
   display: flex;
   align-items: center;
-  // width: 100%;
   justify-content: space-between;
   overflow: hidden;
   position: relative;
+  width: 100%;
+  height: 400px;
+  
+  @media (max-width: 480px) {
+    height: 200px;
+  }
+  
+  @media (min-width: 481px) and (max-width: 768px) {
+    height: 250px;
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    height: 300px;
+  }
+  
+  @media (min-width: 1025px) and (max-width: 1440px) {
+    height: 350px;
+  }
+
   .slider--btn_prev,
   .slider--btn_next {
     position: absolute;
@@ -14,50 +32,222 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    width: 120px;
+    width: 60px;
+    
+    @media (max-width: 480px) {
+      width: 40px;
+    }
+    
+    @media (min-width: 481px) and (max-width: 768px) {
+      width: 50px;
+    }
 
     svg {
-      width: 50px;
+      width: 30px;
+      height: 30px;
       stroke-width: 2px;
       transition: 0.3s;
-      color: gray;
+      color: rgba(255, 255, 255, 0.7);
+      
+      @media (max-width: 480px) {
+        width: 20px;
+        height: 20px;
+        stroke-width: 1.5px;
+      }
+      
+      @media (min-width: 481px) and (max-width: 768px) {
+        width: 25px;
+        height: 25px;
+      }
     }
+    
     &:hover {
       svg {
         color: white;
       }
     }
+    
+    @media (max-width: 480px) {
+      &:hover {
+        background: rgba(0, 0, 0, 0.3);
+      }
+    }
   }
+  
   .slider--btn_prev {
     left: 0;
   }
+  
   .slider--btn_next {
     right: 0;
   }
+  
   .slider--track {
-    // width: 100%;
-    // height: 600px;
+    width: 100%;
+    height: 100%;
+    
     .slider--content {
       height: 100%;
       display: flex;
       align-items: center;
-      transition: 1s;
+      transition: 0.5s ease-in-out;
+      
       .slide {
-        width: 1380px;
+        flex-shrink: 0;
         overflow: hidden;
-        margin: 0 20px;
         height: 100%;
+        border-radius: 10px;
+        position: relative;
+        background: #1a1a1a; // Fallback цвет
+        
+        @media (max-width: 480px) {
+          border-radius: 6px;
+        }
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+          border-radius: 8px;
+        }
+        
         &.active {
           img {
             opacity: 1;
+            transform: scale(1.05);
           }
         }
+        
         img {
-          max-width: 100%;
-          border-radius: 10px;
+          width: 100%;
           height: 100%;
+          object-fit: cover;
+          object-position: center;
+          border-radius: inherit;
           opacity: 0.5;
-          transition: 0.7s;
+          transition: 0.7s ease-in-out;
+          will-change: transform, opacity; // Оптимизация производительности
+          
+          // Оптимизация для разных устройств
+          @media (max-width: 480px) {
+            object-position: center 20%;
+          }
+          
+          @media (min-width: 481px) and (max-width: 768px) {
+            object-position: center 25%;
+          }
+          
+          @media (min-width: 769px) and (max-width: 1024px) {
+            object-position: center 30%;
+          }
+          
+          &:hover {
+            opacity: 0.8;
+            transform: scale(1.02);
+          }
+          
+          // Оптимизация для устройств с высоким DPI
+          @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+          }
+        }
+        
+        // Добавляем градиент для лучшей читаемости текста (если будет)
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 30%;
+          background: linear-gradient(transparent, rgba(0, 0, 0, 0.3));
+          pointer-events: none;
+          
+          @media (max-width: 480px) {
+            height: 40%;
+          }
+        }
+        
+        // Индикатор загрузки
+        &::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 30px;
+          height: 30px;
+          border: 2px solid rgba(255, 255, 255, 0.3);
+          border-top: 2px solid white;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+          opacity: 0;
+          transition: opacity 0.3s;
+          z-index: 1;
+        }
+        
+        &.loading::before {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+// Анимация загрузки
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+// Скрываем кнопки на очень маленьких экранах
+@media (max-width: 320px) {
+  .slider {
+    .slider--btn_prev,
+    .slider--btn_next {
+      display: none;
+    }
+  }
+}
+
+// Оптимизация для ландшафтной ориентации на мобильных
+@media (max-width: 768px) and (orientation: landscape) {
+  .slider {
+    height: 180px;
+    
+    @media (max-width: 480px) {
+      height: 150px;
+    }
+  }
+}
+
+// Оптимизация для планшетов в портретной ориентации
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: portrait) {
+  .slider {
+    height: 400px;
+  }
+}
+
+// Оптимизация для устройств с поддержкой hover
+@media (hover: hover) {
+  .slider {
+    .slide {
+      img {
+        &:hover {
+          opacity: 0.8;
+          transform: scale(1.02);
+        }
+      }
+    }
+  }
+}
+
+// Оптимизация для устройств без поддержки hover
+@media (hover: none) {
+  .slider {
+    .slide {
+      img {
+        &:hover {
+          opacity: 0.5;
+          transform: none;
         }
       }
     }
