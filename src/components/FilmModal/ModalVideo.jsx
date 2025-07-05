@@ -24,7 +24,7 @@ export const ModalVideo = ({
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [procent, setProcent] = useState(0);
-  const [currentPointerTime, setPointerTime] = useState(0);
+  const [currentPointerTime, setPointerTime] = useState("00:00");
 
   const playerRef = useRef();
 
@@ -55,6 +55,7 @@ export const ModalVideo = ({
   const onMouseMove = (e) => {
     //Наводим мышку на progress-bar
     if (e.target === e.currentTarget) {
+      if (videoRef.current.duration <= 0) return false;
       const width = e.nativeEvent.target.offsetWidth;
       const currentPosition = e.nativeEvent.offsetX;
       const procentMove = (currentPosition / width) * 100;

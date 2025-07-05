@@ -17,35 +17,40 @@
     margin: 0 auto;
     overflow-y: scroll;
     height: 100%;
+    position: relative;
     .film--modal__header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      height: 50px;
+      width: 100%;
+      justify-content: end;
       padding: 10px 20px;
-      position: sticky;
+
+      position: absolute;
       top: 0;
       z-index: 5;
-      background: var(--bg-color);
-      // background-color: var(--bg-color);
-      //.film--modal__header--btns {
-      //  button {
-      //    margin-right: 20px;
-      //    border-bottom: 1px solid #fff;
-      //  }
-      //  button.active {
-      //    margin-right: 20px;
-      //    color: var(--accent-color);
-      //    border-bottom: 1px solid var(--accent-color);
-      //  }
-      //}
+
       .film--modal__header--close {
+        border: 1px solid #fff;
+        border-radius: 50%;    backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        justify-content:center;
+        padding: 5px;
+        transition: .3s;
+        cursor: pointer;
+        right: 0;
         svg {
           cursor: pointer;
           z-index: 1;
+          width: 18px;
+          height: 18px;
           transition: 0.3s;
-          &:hover {
+        }
+        &:hover {
+          border: 1px solid var(--accent-color);
+          svg {
             color: var(--accent-color);
+
           }
         }
       }
@@ -72,7 +77,7 @@
           overflow: hidden;
           transition: 0.3s;
           position: absolute;
-          //bottom: 2px;
+          bottom: 2px;
         }
         .player {
           display: flex;
@@ -80,43 +85,95 @@
           bottom: 0;
           justify-content: space-between;
           width: 100%;
-          padding: 10px;
+          padding: 12px 16px;
           align-items: center;
-/*
-* Created with https://www.css-gradient.com
-* Gradient link: https://www.css-gradient.com/?c1=ffffff00&c2=6944df99&gt=l&gd=dtt
-*/
-// background: rgba(255, 255, 255, 0.0);
-// background: linear-gradient(180deg, rgba(255, 255, 255, 0.0), rgba(105, 68, 223, 0.6));
-     
+          background: #201c2c;
+          
           .player--icon {
             cursor: pointer;
+            color: #fff;
+            padding: 5px;
+            border-radius: 4px;
+            width: 30px;
+            height: 30px;
+            transition: background-color 0.2s ease;
+            
+            
+   
           }
+          
           .player--content {
-            width: 90%;
-            display: flex ;
+            flex: 1;
+            display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 16px;
+            margin: 0 16px;
+            
             span {
-              margin: 0 10px;
-              font-size: 14px;
-              width: 35px;
+              margin: 0;
+              font-size: 12px;
+              width: 32px;
+              color: #ccc;
+              font-weight: 400;
+              text-align: center;
             }
+            
             .player--progress {
-              width: 100%;
-              height: 5px;
-              border-radius: 10px;
-              // overflow: hidden;
-              background: var( --text-blue-color);
+              flex: 1;
+              height: 4px;
+              border-radius: 3px;
+              background: #444;
+              cursor: pointer;
+              position: relative;
+
+              span {
+                position: absolute;
+                background: #222;
+                color: #fff;
+                padding: 4px 8px;
+                width: auto;
+                min-width: 45px;
+                border-radius: 3px;
+                top: -30px;
+                text-align: center;
+                transform: translateX(-50%);
+                font-size: 11px;
+                font-weight: 400;
+                opacity: 0;
+                transition: opacity 0.2s ease;
+                pointer-events: none;
+                border: 1px solid #444;
+              }
+              
+              &:hover span {
+                opacity: 1;
+              }
+              
               .player--progress_bar {
                 background-color: var(--accent-color);
-                transition: .3s;
+                transition: width 0.1s ease;
                 height: 100%;
-                border-radius: 10px;
+                border-radius: 3px;
+                pointer-events: none;
               }
             }
           }
-         
+          
+          svg {
+            cursor: pointer;
+            color: #fff;
+            padding: 5px;
+            width: 26px;
+            height: 26px;
+            margin-left: 10px;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            
+            &:hover {
+              background-color: rgba(255, 255, 255, 0.1);
+            }
+            
+          }
         }
 
         .film--modal__video-footer {
