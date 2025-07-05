@@ -1,7 +1,10 @@
+// Routing
 import { Link, useLocation } from 'react-router-dom'
 
+// Constants
 import { NAV } from '../../../constants.jsx'
 
+// Styles
 import styles from './sidebar.module.scss'
 
 export const Sidebar = () => {

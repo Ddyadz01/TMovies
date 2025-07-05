@@ -13,11 +13,10 @@ export const Home = () => {
   const [isModal, setIsModal] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const {  updateCurrentMovie } = useMovieStore((state) => state)
-
+  const { updateCurrentMovie } = useMovieStore((state) => state);
 
   const clickFilm = (movie) => {
-    updateCurrentMovie(movie)
+    updateCurrentMovie(movie);
     setIsModal(true);
     setSearchParams({
       id: movie.id, movie: movie.title,
@@ -33,8 +32,6 @@ export const Home = () => {
       setSearchParams({});
     }
   }, []);
-
-
 
   return (<>
     <div>

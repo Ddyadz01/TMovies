@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useMovieStore } from '../store/store';
 
-export  const useVideoModal = (setSearchParams,setIsModal, videoRef ) => {
+export const useVideoModal = (setSearchParams, setIsModal, videoRef) => {
   const [isMuted, setIsMuted] = useState(true)
   const [progress, setProgress] = useState(0)
   const [buffered, setBuffered] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const location = window.location.hostname
 
-  const {updateIsFullMovie} = useMovieStore()
-
+  const { updateIsFullMovie } = useMovieStore()
 
   useEffect(() => {
     if (videoRef.current) {

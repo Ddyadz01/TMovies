@@ -1,17 +1,24 @@
-import styles from './film-modal.module.scss';
-import { Button } from '../Button/Button.jsx';
-import { MonitorPlay } from 'lucide-react';
-import { useMovieStore } from '../../store/store.js';
+// Icons
+import { MonitorPlay } from 'lucide-react'
 
-export const ModalFilmInfo = ({videoRef}) => {
+// Store
+import { useMovieStore } from '../../store/store.js'
+
+// Components
+import { Button } from '../Button/Button.jsx'
+
+// Styles
+import styles from './film-modal.module.scss'
+
+export const ModalFilmInfo = ({ videoRef }) => {
   const { currentMovie, isFullMovie, updateIsFullMovie } = useMovieStore((state) => state)
 
   const handleFullMovie = () => {
-    if (!videoRef.current) return;
-    
+    if (!videoRef.current) return
+
     videoRef.current.pause()
 
-    if(isFullMovie) {
+    if (isFullMovie) {
       videoRef.current.src = currentMovie.trailerUrl
       updateIsFullMovie(false)
     } else {
@@ -19,9 +26,9 @@ export const ModalFilmInfo = ({videoRef}) => {
       videoRef.current.src = currentMovie.fullVideo
     }
 
-    videoRef.current.play().catch(console.error);
+    videoRef.current.play().catch(console.error)
   }
-  
+
   return (
     <div className={styles['film--modal__info']}>
       <div className={styles['film--modal__title']}>

@@ -1,8 +1,15 @@
+// Icons
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+
+// Constants
+import { SLIDES } from '../../../constants.jsx'
+
+// Hooks
+import { useSlider } from '../../hooks/useSlider.jsx'
+
+// Styles
 import styles from './slider.module.scss'
 
-import { SLIDES } from '../../../constants.jsx'
-import { useSlider } from '../../hooks/useSlider.jsx'
 export const Slider = () => {
   const { prevSlide, nextSlide, activeId, currentPosition } = useSlider()
 

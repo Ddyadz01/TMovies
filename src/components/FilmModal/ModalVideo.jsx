@@ -1,9 +1,9 @@
-import styles from './film-modal.module.scss'
-import { Loader } from '../Loader/Loader.jsx'
+import { useEffect, useRef, useState } from 'react'
 import { Expand, PauseIcon, PlayIcon, Volume2Icon, VolumeOff } from 'lucide-react'
 import { useMovieStore } from '../../store/store.js'
 import { FormatSeconds } from '../../utils/SecondsFormat.jsx'
-import { useEffect, useRef, useState } from 'react'
+import { Loader } from '../Loader/Loader.jsx'
+import styles from './film-modal.module.scss'
 
 export const ModalVideo = ({ isPlaying, isMuted, videoRef, timeUpdate, progress, buffered, updateBuffered, volumeOff }) => {
   const { currentMovie, isFullMovie } = useMovieStore((state) => state)

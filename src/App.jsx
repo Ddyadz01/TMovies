@@ -1,5 +1,10 @@
+// React
 import { Route, Routes } from 'react-router-dom'
+
+// Components
 import { Sidebar } from './components/Index'
+
+// Pages
 import { Home, Popular } from './pages/Index'
 
 function App() {

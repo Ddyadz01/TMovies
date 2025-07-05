@@ -1,7 +1,4 @@
-export { Sidebar } from './Sidebar/Sidebar'
-
-export { Slider } from './Slider/Slider'
-
+export { Button } from './Button/Button'
 export { FilmModal } from './FilmModal/FilmModal'
-
-export {Button} from './Button/Button'
+export { Sidebar } from './Sidebar/Sidebar'
+export { Slider } from './Slider/Slider'

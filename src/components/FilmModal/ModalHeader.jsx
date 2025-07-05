@@ -1,5 +1,8 @@
-import styles from './film-modal.module.scss'
+// Icons
 import { X } from 'lucide-react'
+
+// Styles
+import styles from './film-modal.module.scss'
 
 export const ModalHeader = ({ closeHandler }) => {
   return (
