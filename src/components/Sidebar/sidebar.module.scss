@@ -1,52 +1,318 @@
-.sidebar {
-  width: 13%;
-  height: 100vh;
-  background-color: rgb(15 16 42);
-  padding: 20px 0;
-  position: sticky;
+// Мобильная кнопка меню
+.mobile-menu-btn {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  background: var(--accent-color);
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  
+  &:hover {
+    background: #5a3bc7;
+  }
+  
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+// Оверлей для мобильного меню
+.mobile-overlay {
+  display: none;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  background: linear-gradient(180deg, #0f102a 0%, #1a1b3a 100%);
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out;
+  
+  @media (max-width: 768px) {
+    transform: translateX(-100%);
+    width: 280px;
+    
+    &.mobile-open {
+      transform: translateX(0);
+    }
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    width: 240px;
+  }
+  
+  @media (min-width: 1025px) {
+    width: 280px;
+  }
+
   &--logo {
+    padding: 30px 20px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    
     h1 {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 35px;
+      font-size: 32px;
       font-weight: bold;
-      margin: 10px;
+      margin: 0 0 5px 0;
       color: var(--accent-color);
+      text-shadow: 0 0 10px rgba(103, 68, 223, 0.3);
+    }
+    
+    .sidebar--subtitle {
+      display: block;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 500;
+      letter-spacing: 1px;
     }
   }
+  
   &--nav {
-    margin-top: 40px;
-    ul {
-      li {
-        margin: 10px 0;
-        padding: 5px;
-        position: relative;
-        &.active {
+    flex: 1;
+    padding: 20px 0;
+    overflow-y: auto;
+    
+    .nav-section {
+      margin-bottom: 30px;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+      
+      &--title {
+        font-size: 11px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.4);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin: 0 20px 15px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        
+        li {
+          margin: 0;
+          position: relative;
+          
+          &.active {
+            background: rgba(103, 68, 223, 0.1);
+            
+            a {
+              color: var(--accent-color);
+              
+              svg {
+                color: var(--accent-color);
+              }
+            }
+            
+            &::before {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 0;
+              height: 100%;
+              background: var(--accent-color);
+              width: 4px;
+              border-radius: 0 2px 2px 0;
+            }
+          }
+          
           a {
-            color: var(--accent-color);
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            
+            &:hover {
+              background: rgba(255, 255, 255, 0.05);
+              color: white;
+              
+              svg {
+                color: var(--accent-color);
+              }
+            }
+            
+            svg {
+              width: 20px;
+              height: 20px;
+              margin-right: 12px;
+              color: rgba(255, 255, 255, 0.6);
+              transition: color 0.3s ease;
+            }
+            
+            span {
+              flex: 1;
+            }
           }
         }
-        &.active::after {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: 0;
-          height: 100%;
-          background-color: var(--accent-color);
-          border-radius: 0 4px 4px 0;
-          width: 6px;
+      }
+    }
+  }
+  
+  &--footer {
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    
+    .user-info {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--accent-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+        font-size: 18px;
+      }
+      
+      .user-details {
+        flex: 1;
+        
+        .user-name {
+          display: block;
+          font-size: 14px;
+          font-weight: 600;
+          color: white;
+          margin-bottom: 2px;
         }
-        a {
-          color: var(--white-color-text);
-          transition: 0.3s;
-          margin-left: 10px;
-          font-weight: bold;
-          display: flex;
-          align-items: center;
+        
+        .user-status {
+          display: block;
+          font-size: 12px;
+          color: rgba(255, 255, 255, 0.6);
+        }
+      }
+    }
+  }
+}
+
+// Скроллбар для навигации
+.sidebar--nav::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar--nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar--nav::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+.sidebar--nav::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+// Анимации
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+// Дополнительные стили для мобильных устройств
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+    max-width: 320px;
+  }
+  
+  .mobile-menu-btn {
+    top: 15px;
+    left: 15px;
+    padding: 10px;
+  }
+}
+
+// Стили для планшетов
+@media (min-width: 769px) and (max-width: 1024px) {
+  .sidebar {
+    &--logo {
+      padding: 25px 15px 15px;
+      
+      h1 {
+        font-size: 28px;
+      }
+    }
+    
+    &--nav {
+      .nav-section {
+        &--title {
+          margin: 0 15px 12px;
+          font-size: 10px;
+        }
+        
+        ul li a {
+          padding: 10px 15px;
+          font-size: 13px;
+          
           svg {
-            margin-right: 5px;
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
           }
         }
       }

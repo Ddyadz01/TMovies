@@ -6,21 +6,39 @@ body {
   background-color: var(--bg-color);
   color: var(--white-text-color);
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 .wrapper {
   display: flex;
   align-items: start;
-  max-width: 1800px;
-  margin: 0 auto;
   width: 100%;
-  justify-content: space-between;
-  max-width: 1920px;
+  min-height: 100vh;
+  position: relative;
 }
 
 .content {
-  width: calc(100% - 13%);
+  flex: 1;
+  margin-left: 280px;
   padding: 20px;
+  min-height: 100vh;
+  transition: margin-left 0.3s ease-in-out;
+  
+  @media (max-width: 768px) {
+    margin-left: 0;
+    padding: 20px 15px;
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    margin-left: 240px;
+    padding: 20px 15px;
+  }
+  
+  @media (min-width: 1025px) {
+    margin-left: 280px;
+    padding: 20px 30px;
+  }
 }
 
 *::-webkit-scrollbar {
@@ -33,7 +51,27 @@ body {
 
 *::-webkit-scrollbar-thumb {
   background: var(--accent-color);
+  border-radius: 3px;
+  
+  &:hover {
+    background: #5a3bc7;
+  }
+}
 
-  border-radius: 0px; /* округлось бегунка */
-  // border: 3px solid orange; /* отступ вокруг бегунка */
+@media (max-width: 480px) {
+  .content {
+    padding: 15px 10px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .content {
+    padding: 20px 15px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .content {
+    padding: 30px 40px;
+  }
 }
