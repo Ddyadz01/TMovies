@@ -5,16 +5,7 @@ import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 // Icons
-import { 
-  HomeIcon, 
-  TrendingUp, 
-  Search, 
-  Heart, 
-  Clock, 
-  Settings,
-  Menu,
-  X
-} from 'lucide-react'
+import { HomeIcon, TrendingUp, Search, Heart, Clock, Settings, Menu, X } from 'lucide-react'
 
 // Constants
 import { NAV } from '../../../constants.jsx'
@@ -30,38 +21,38 @@ export const Sidebar = () => {
   const mainNav = [
     {
       id: 1,
-      title: "Главная",
-      href: "/home",
+      title: 'Главная',
+      href: '/',
       icon: HomeIcon,
     },
     {
       id: 2,
-      title: "Популярное",
-      href: "#",
+      title: 'Популярное',
+      href: '#',
       icon: TrendingUp,
     },
     {
       id: 3,
-      title: "Поиск",
-      href: "#",
+      title: 'Поиск',
+      href: '#',
       icon: Search,
     },
     {
       id: 4,
-      title: "Избранное",
-      href: "#",
+      title: 'Избранное',
+      href: '#',
       icon: Heart,
     },
     {
       id: 5,
-      title: "Недавние",
-      href: "#",
+      title: 'Недавние',
+      href: '#',
       icon: Clock,
     },
     {
       id: 6,
-      title: "Настройки",
-      href: "#",
+      title: 'Настройки',
+      href: '#',
       icon: Settings,
     },
   ]
@@ -83,14 +74,14 @@ export const Sidebar = () => {
           <h1>TMovie</h1>
           <span className={styles['sidebar--subtitle']}>Кинотека</span>
         </div>
-        
+
         <div className={styles['sidebar--nav']}>
           <div className={styles['nav-section']}>
             <h3 className={styles['nav-section--title']}>Навигация</h3>
             <ul>
               {mainNav.slice(0, 3).map((item) => (
                 <li key={item.id} className={pathname === item.href ? styles['active'] : ''}>
-                  {item.href === "#" ? (
+                  {item.href === '#' ? (
                     <div className={styles['nav-item']}>
                       <item.icon />
                       <span>{item.title}</span>
@@ -111,7 +102,7 @@ export const Sidebar = () => {
             <ul>
               {mainNav.slice(3, 6).map((item) => (
                 <li key={item.id} className={pathname === item.href ? styles['active'] : ''}>
-                  {item.href === "#" ? (
+                  {item.href === '#' ? (
                     <div className={styles['nav-item']}>
                       <item.icon />
                       <span>{item.title}</span>

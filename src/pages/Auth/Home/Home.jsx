@@ -1,6 +1,3 @@
-// React
-import { useState } from 'react'
-
 // Components
 import { Slider } from '../../../components/Slider/Slider.jsx'
 import { MovieCard } from '../../../components/MovieCard/MovieCard.jsx'
