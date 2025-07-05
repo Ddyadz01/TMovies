@@ -4,6 +4,7 @@ import { useMovieStore } from '../store/store';
 export  const useVideoModal = (setSearchParams,setIsModal, videoRef ) => {
   const [isMuted, setIsMuted] = useState(true)
   const [progress, setProgress] = useState(0)
+  const [buffered, setBuffered] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const location = window.location.hostname
 
@@ -31,6 +32,25 @@ export  const useVideoModal = (setSearchParams,setIsModal, videoRef ) => {
     }
   }
 
+  const updateBuffered = (e) => {
+    if (!videoRef.current || !videoRef.current.buffered.length) return
+    
+    const buffered = videoRef.current.buffered
+    const duration = videoRef.current.duration
+    
+    if (duration > 0) {
+      let bufferedEnd = 0
+      for (let i = 0; i < buffered.length; i++) {
+        if (buffered.end(i) > bufferedEnd) {
+          bufferedEnd = buffered.end(i)
+        }
+      }
+      
+      const bufferedPercent = (bufferedEnd / duration) * 100
+      setBuffered(bufferedPercent)
+    }
+  }
+
   const closeHandler = () => {
     setSearchParams({})
     setIsModal((prev) => !prev)
@@ -44,10 +64,12 @@ export  const useVideoModal = (setSearchParams,setIsModal, videoRef ) => {
     videoRef,
     isMuted,
     progress,
+    buffered,
     isPlaying,
     closeHandler,
     volumeOff,
     timeUpdate,
+    updateBuffered,
     location
   }
 }

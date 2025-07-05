@@ -31,12 +31,13 @@
 
       .film--modal__header--close {
         border: 1px solid #fff;
-        border-radius: 50%;    backdrop-filter: blur(10px);
+        border-radius: 50%;
+        backdrop-filter: blur(10px);
         display: flex;
         align-items: center;
-        justify-content:center;
+        justify-content: center;
         padding: 5px;
-        transition: .3s;
+        transition: 0.3s;
         cursor: pointer;
         right: 0;
         svg {
@@ -50,7 +51,6 @@
           border: 1px solid var(--accent-color);
           svg {
             color: var(--accent-color);
-
           }
         }
       }
@@ -79,6 +79,36 @@
           position: absolute;
           bottom: 2px;
         }
+        
+        // Контейнер для прогресс-бара с загруженной частью
+        .progress-container {
+          position: absolute;
+          bottom: 2px;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background-color: #444;
+          
+          .progress-buffered {
+            height: 100%;
+            background-color: #666;
+            transition: width 0.3s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+          }
+          
+          .progress {
+            height: 100%;
+            background-color: var(--accent-color);
+            transition: 0.3s;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+          }
+        }
         .player {
           display: flex;
           position: absolute;
@@ -88,7 +118,7 @@
           padding: 12px 16px;
           align-items: center;
           background: #201c2c;
-          
+
           .player--icon {
             cursor: pointer;
             color: #fff;
@@ -97,18 +127,15 @@
             width: 30px;
             height: 30px;
             transition: background-color 0.2s ease;
-            
-            
-   
           }
-          
+
           .player--content {
             flex: 1;
             display: flex;
             align-items: center;
             gap: 16px;
             margin: 0 16px;
-            
+
             span {
               margin: 0;
               font-size: 12px;
@@ -117,7 +144,7 @@
               font-weight: 400;
               text-align: center;
             }
-            
+
             .player--progress {
               flex: 1;
               height: 4px;
@@ -144,21 +171,48 @@
                 pointer-events: none;
                 border: 1px solid #444;
               }
-              
+
               &:hover span {
                 opacity: 1;
               }
-              
+
+              .player--progress_buffered {
+                background-color: #666;
+                transition: width 0.3s ease;
+                height: 100%;
+                border-radius: 3px;
+                pointer-events: none;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 1;
+              }
+
               .player--progress_bar {
                 background-color: var(--accent-color);
                 transition: width 0.1s ease;
                 height: 100%;
                 border-radius: 3px;
                 pointer-events: none;
+                position: relative;
+                z-index: 2;
+                &::before {
+                  content: '';
+                  display: block;
+                  width: 10px;
+                  height: 10px;
+                  background-color: var(--accent-color);
+                  position: absolute;
+                  border-radius: 50%;
+                  right: 0;
+                  right: -5px;
+                  top: 0%;
+                  transform: translateY(-40%);
+                }
               }
             }
           }
-          
+
           svg {
             cursor: pointer;
             color: #fff;
@@ -168,11 +222,10 @@
             margin-left: 10px;
             border-radius: 4px;
             transition: background-color 0.2s ease;
-            
+
             &:hover {
               background-color: rgba(255, 255, 255, 0.1);
             }
-            
           }
         }
 
@@ -215,19 +268,19 @@
             p {
               margin-right: 3px;
               font-size: 14px;
-              color: var( --text-blue-color);
+              color: var(--text-blue-color);
             }
           }
           .film--modal__country {
             margin: 10px 0;
-            color: var( --text-blue-color);
+            color: var(--text-blue-color);
             display: flex;
             align-items: center;
             .film--modal__age {
               margin-left: 5px;
               font-size: 14px;
-              border: 1px solid var( --text-blue-color);
-              color: var( --text-blue-color);
+              border: 1px solid var(--text-blue-color);
+              color: var(--text-blue-color);
               // font-weight: bold;
               padding: 5px 8px;
               border-radius: 5px;
@@ -244,7 +297,7 @@
               margin-bottom: 5px;
             }
             margin: 20px 0;
-            color: var( --text-blue-color);
+            color: var(--text-blue-color);
           }
         }
       }
@@ -252,12 +305,20 @@
   }
 }
 
+@media (max-width: 1200px) {
+  .film--modal {
+    &__content {
+      width: 80%;
+    }
+  }
+}
 @media (max-width: 600px) {
   .film--modal {
     padding: 0;
     &__content {
       width: 100%;
       padding: 0;
+
       background-color: rgb(3 4 26 / 22%);
       .film--modal__body {
         .film--modal__video {

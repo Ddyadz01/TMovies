@@ -19,10 +19,12 @@ export const FilmModal = ({ setSearchParams, setIsModal }) => {
   const {
     isMuted,
     progress,
+    buffered,
     isPlaying,
     closeHandler,
     volumeOff,
     timeUpdate,
+    updateBuffered,
   } = useVideoModal(setSearchParams,setIsModal, videoRef)
 
   return (
@@ -37,7 +39,9 @@ export const FilmModal = ({ setSearchParams, setIsModal }) => {
               isPlaying={isPlaying}
               isMuted={isMuted}
               progress={progress}
+              buffered={buffered}
               timeUpdate={timeUpdate}
+              updateBuffered={updateBuffered}
               volumeOff={volumeOff}
             />
             <ModalFilmInfo videoRef = {videoRef} />
