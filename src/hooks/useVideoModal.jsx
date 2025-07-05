@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useMovieStore } from '../store/store';
 
-export const useVideoModal = (setSearchParams, setIsModal, videoRef) => {
+export const useVideoModal = (closeModal, videoRef) => {
   const [isMuted, setIsMuted] = useState(true)
   const [progress, setProgress] = useState(0)
   const [buffered, setBuffered] = useState(0)
@@ -51,13 +51,9 @@ export const useVideoModal = (setSearchParams, setIsModal, videoRef) => {
   }
 
   const closeHandler = () => {
-    setSearchParams({})
-    setIsModal((prev) => !prev)
-
+    closeModal()
     updateIsFullMovie(false)
-
   }
-
 
   return {
     videoRef,

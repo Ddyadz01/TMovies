@@ -47,7 +47,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 999;
+  z-index: 9;
   display: flex;
   flex-direction: column;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
@@ -103,19 +103,14 @@
     .nav-section {
       margin-bottom: 30px;
       
-      &:last-child {
-        margin-bottom: 0;
-      }
-      
-      &--title {
-        font-size: 11px;
+      .nav-section--title {
+        font-size: 12px;
         font-weight: 600;
-        color: rgba(255, 255, 255, 0.4);
+        color: var(--text-secondary);
         text-transform: uppercase;
-        letter-spacing: 1px;
-        margin: 0 20px 15px;
-        padding-bottom: 8px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        letter-spacing: 0.5px;
+        margin-bottom: 15px;
+        padding: 0 20px;
       }
       
       ul {
@@ -124,61 +119,56 @@
         margin: 0;
         
         li {
-          margin: 0;
-          position: relative;
+          margin-bottom: 5px;
           
-          &.active {
-            background: rgba(103, 68, 223, 0.1);
-            
-            a {
-              color: var(--accent-color);
-              
-              svg {
-                color: var(--accent-color);
-              }
-            }
-            
-            &::before {
-              content: '';
-              position: absolute;
-              left: 0;
-              top: 0;
-              height: 100%;
-              background: var(--accent-color);
-              width: 4px;
-              border-radius: 0 2px 2px 0;
-            }
-          }
-          
-          a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            padding: 12px 20px;
+          a, .nav-item {
             display: flex;
             align-items: center;
-            font-weight: 500;
-            font-size: 14px;
+            padding: 12px 20px;
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 0 10px;
             transition: all 0.3s ease;
-            
-            &:hover {
-              background: rgba(255, 255, 255, 0.05);
-              color: white;
-              
-              svg {
-                color: var(--accent-color);
-              }
-            }
+            cursor: pointer;
             
             svg {
               width: 20px;
               height: 20px;
               margin-right: 12px;
-              color: rgba(255, 255, 255, 0.6);
-              transition: color 0.3s ease;
+              stroke-width: 1.5px;
             }
             
             span {
-              flex: 1;
+              font-size: 14px;
+              font-weight: 500;
+            }
+            
+            &:hover {
+              background: var(--bg-hover);
+              color: var(--accent-color);
+            }
+          }
+          
+          &.active {
+            a {
+              background: var(--accent-color);
+              color: white;
+              
+              &:hover {
+                background: var(--accent-hover);
+              }
+            }
+          }
+          
+          // Стили для неактивных элементов
+          .nav-item {
+            opacity: 0.6;
+            cursor: not-allowed;
+            
+            &:hover {
+              background: transparent;
+              color: var(--text-primary);
             }
           }
         }

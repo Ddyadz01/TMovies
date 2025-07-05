@@ -9,11 +9,11 @@ import { ModalFilmInfo } from './ModalFilmInfo.jsx';
 import styles from './film-modal.module.scss'
 import { useMovieStore } from '../../store/store.js';
 
-export const FilmModal = ({ setSearchParams, setIsModal }) => {
+export const FilmModal = () => {
 
   const videoRef = useRef(null)
 
-  const {  currentMovie } = useMovieStore((state) => state)
+  const { currentMovie, closeModal } = useMovieStore((state) => state)
 
   const {
     isMuted,
@@ -24,7 +24,7 @@ export const FilmModal = ({ setSearchParams, setIsModal }) => {
     volumeOff,
     timeUpdate,
     updateBuffered,
-  } = useVideoModal(setSearchParams,setIsModal, videoRef)
+  } = useVideoModal(closeModal, videoRef)
 
   return (
     <>

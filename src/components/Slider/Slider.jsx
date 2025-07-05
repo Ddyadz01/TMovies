@@ -22,10 +22,13 @@ export const Slider = () => {
     slideWidth, 
     slideMargin,
     sliderRef,
-    isDragging
+    isDragging,
+    canGoPrev,
+    canGoNext
   } = useSlider()
 
   const [loadingStates, setLoadingStates] = useState({})
+  const [buttonLoading, setButtonLoading] = useState(false)
 
   const handleImageLoad = (slideId) => {
     setLoadingStates(prev => ({
@@ -48,11 +51,39 @@ export const Slider = () => {
     }))
   }
 
+  const handlePrevClick = () => {
+    if (!canGoPrev || buttonLoading) return
+    
+    setButtonLoading(true)
+    prevSlide()
+    
+    // Сброс состояния загрузки через небольшую задержку
+    setTimeout(() => setButtonLoading(false), 300)
+  }
+
+  const handleNextClick = () => {
+    if (!canGoNext || buttonLoading) return
+    
+    setButtonLoading(true)
+    nextSlide()
+    
+    // Сброс состояния загрузки через небольшую задержку
+    setTimeout(() => setButtonLoading(false), 300)
+  }
+
   return (
     <div className={styles['slider']} ref={sliderRef}>
-      <div className={styles['slider--btn_prev']} onClick={prevSlide}>
+      {/* Левая кнопка */}
+      <button 
+        className={`${styles['slider--btn_prev']} ${buttonLoading ? styles['loading'] : ''}`}
+        onClick={handlePrevClick}
+        disabled={!canGoPrev || buttonLoading}
+        aria-label="Предыдущий слайд"
+        title="Предыдущий слайд"
+      >
         <ChevronLeft />
-      </div>
+      </button>
+      
       <div className={styles['slider--track']}>
         <div
           className={styles['slider--content']}
@@ -83,9 +114,17 @@ export const Slider = () => {
           ))}
         </div>
       </div>
-      <div className={styles['slider--btn_next']} onClick={nextSlide}>
+      
+      {/* Правая кнопка */}
+      <button 
+        className={`${styles['slider--btn_next']} ${buttonLoading ? styles['loading'] : ''}`}
+        onClick={handleNextClick}
+        disabled={!canGoNext || buttonLoading}
+        aria-label="Следующий слайд"
+        title="Следующий слайд"
+      >
         <ChevronRight />
-      </div>
+      </button>
     </div>
   )
 }

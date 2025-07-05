@@ -4,7 +4,7 @@ import { SLIDES } from '../../constants'
 export const useSlider = () => {
   const [currentPosition, setCurrentPossition] = useState(0)
   const [activeId, setActiveId] = useState(2)
-  const [slideWidth, setSlideWidth] = useState(1380)
+  const [slideWidth, setSlideWidth] = useState(800)
   const [slideMargin, setSlideMargin] = useState(20)
   const [isDragging, setIsDragging] = useState(false)
   const [startX, setStartX] = useState(0)
@@ -15,30 +15,27 @@ export const useSlider = () => {
   // Определяем размеры слайдов в зависимости от ширины экрана
   const getSlideDimensions = () => {
     const width = window.innerWidth
-    const height = window.innerHeight
-    const isLandscape = width > height
+    
+    // Учитываем ширину сайдбара
+    let sidebarWidth = 280 // десктоп
+    if (width <= 768) {
+      sidebarWidth = 0 // мобильные - сайдбар скрыт
+    } else if (width <= 1024) {
+      sidebarWidth = 240 // планшеты
+    }
+    
+    const availableWidth = width - sidebarWidth - 40 // отступы контента
     
     if (width <= 480) {
-      // Мобильные устройства
-      if (isLandscape) {
-        return { width: width - 20, margin: 5 }
-      }
-      return { width: width - 30, margin: 8 }
+      return { width: availableWidth - 80, margin: 10 } // Учитываем отступы для кнопок
     } else if (width <= 768) {
-      // Планшеты
-      if (isLandscape) {
-        return { width: width - 40, margin: 10 }
-      }
-      return { width: width - 60, margin: 12 }
+      return { width: availableWidth - 100, margin: 15 }
     } else if (width <= 1024) {
-      // Маленькие десктопы
-      return { width: Math.min(width - 100, 800), margin: 15 }
+      return { width: availableWidth - 120, margin: 20 }
     } else if (width <= 1440) {
-      // Средние десктопы
-      return { width: Math.min(width - 120, 1100), margin: 20 }
+      return { width: availableWidth - 140, margin: 20 }
     } else {
-      // Большие десктопы
-      return { width: Math.min(width - 140, 1380), margin: 20 }
+      return { width: availableWidth - 160, margin: 20 }
     }
   }
 
@@ -148,6 +145,10 @@ export const useSlider = () => {
     return () => clearInterval(interval)
   }, [currentPosition, slideWidth, slideMargin, isDragging])
 
+  // Определяем возможность навигации
+  const canGoPrev = true // Всегда можно, так как слайдер циклический
+  const canGoNext = true // Всегда можно, так как слайдер циклический
+
   return { 
     nextSlide, 
     prevSlide, 
@@ -156,6 +157,8 @@ export const useSlider = () => {
     slideWidth, 
     slideMargin,
     sliderRef,
-    isDragging
+    isDragging,
+    canGoPrev,
+    canGoNext
   }
 }

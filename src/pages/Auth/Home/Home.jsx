@@ -1,62 +1,49 @@
-import { useEffect, useState } from 'react';
+// React
+import { useState } from 'react'
 
-import { useSearchParams } from 'react-router-dom';
+// Components
+import { Slider } from '../../../components/Slider/Slider.jsx'
+import { MovieCard } from '../../../components/MovieCard/MovieCard.jsx'
 
-import { FILMSLIST } from '../../../../constants';
+// Constants
+import { FILMSLIST } from '../../../../constants.jsx'
 
-import { FilmModal, Slider } from '../../../components/Index';
-
-import styles from './home.module.scss';
-import { useMovieStore } from '../../../store/store.js';
+// Styles
+import styles from './home.module.scss'
 
 export const Home = () => {
-  const [isModal, setIsModal] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
+  // Получаем последние 6 фильмов для секции "Недавно добавленные"
+  const recentMovies = FILMSLIST.slice(-6)
 
-  const { updateCurrentMovie } = useMovieStore((state) => state);
+  // Получаем все фильмы для секции "Все фильмы"
+  const allMovies = FILMSLIST
 
-  const clickFilm = (movie) => {
-    updateCurrentMovie(movie);
-    setIsModal(true);
-    setSearchParams({
-      id: movie.id, movie: movie.title,
-    });
-  };
+  return (
+    <div className={styles['home']}>
+      {/* Слайдер с избранными фильмами */}
+      <section className={styles['hero-section']}>
+        <Slider />
+      </section>
 
-  useEffect(() => {
-    const paramId = searchParams.get('id');
-    if (paramId) {
-      const movie = FILMSLIST.find((movie) => movie.id == paramId);
-      clickFilm(movie);
-    } else {
-      setSearchParams({});
-    }
-  }, []);
-
-  return (<>
-    <div>
-      <Slider />
-      <div className={styles['category']}>
-        <h1>Новинки</h1>
-        <div className={styles['category--items']}>
-          {FILMSLIST.map((movie) => (
-            <div
-              onClick={() => clickFilm(movie)}
-              key={movie.id}
-              className={styles['category--item']}
-            >
-              <div className={styles['category--item_content']}>
-                <img src={movie.posterUrl}
-                     alt="" />
-                <h2>{movie.title}</h2>
-              </div>
-            </div>))}
+      {/* Секция с недавно добавленными фильмами */}
+      <section className={styles['recent-section']}>
+        <h2 className={styles['section-title']}>Недавно добавленные</h2>
+        <div className={styles['movies-grid']}>
+          {recentMovies.map((movie) => (
+            <MovieCard key={movie.id} movie={movie} />
+          ))}
         </div>
-      </div>
+      </section>
+
+      {/* Секция со всеми фильмами */}
+      <section className={styles['all-movies-section']}>
+        <h2 className={styles['section-title']}>Все фильмы</h2>
+        <div className={styles['movies-grid']}>
+          {allMovies.map((movie) => (
+            <MovieCard key={movie.id} movie={movie} />
+          ))}
+        </div>
+      </section>
     </div>
-    {isModal && (<FilmModal
-      setSearchParams={setSearchParams}
-      setIsModal={setIsModal}
-    />)}
-  </>);
-};
+  )
+}

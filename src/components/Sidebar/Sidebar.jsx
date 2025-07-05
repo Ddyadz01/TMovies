@@ -26,42 +26,42 @@ export const Sidebar = () => {
   const { pathname } = useLocation()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-  // Расширенная навигация
-  const extendedNav = [
+  // Основная навигация
+  const mainNav = [
     {
       id: 1,
       title: "Главная",
-      href: "/",
+      href: "/home",
       icon: HomeIcon,
     },
     {
       id: 2,
       title: "Популярное",
-      href: "/popular",
+      href: "#",
       icon: TrendingUp,
     },
     {
       id: 3,
       title: "Поиск",
-      href: "/search",
+      href: "#",
       icon: Search,
     },
     {
       id: 4,
       title: "Избранное",
-      href: "/favorites",
+      href: "#",
       icon: Heart,
     },
     {
       id: 5,
       title: "Недавние",
-      href: "/recent",
+      href: "#",
       icon: Clock,
     },
     {
       id: 6,
       title: "Настройки",
-      href: "/settings",
+      href: "#",
       icon: Settings,
     },
   ]
@@ -88,12 +88,19 @@ export const Sidebar = () => {
           <div className={styles['nav-section']}>
             <h3 className={styles['nav-section--title']}>Навигация</h3>
             <ul>
-              {extendedNav.slice(0, 3).map((item) => (
+              {mainNav.slice(0, 3).map((item) => (
                 <li key={item.id} className={pathname === item.href ? styles['active'] : ''}>
-                  <Link to={item.href} onClick={() => setIsMobileMenuOpen(false)}>
-                    <item.icon />
-                    <span>{item.title}</span>
-                  </Link>
+                  {item.href === "#" ? (
+                    <div className={styles['nav-item']}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </div>
+                  ) : (
+                    <Link to={item.href} onClick={() => setIsMobileMenuOpen(false)}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -102,12 +109,19 @@ export const Sidebar = () => {
           <div className={styles['nav-section']}>
             <h3 className={styles['nav-section--title']}>Библиотека</h3>
             <ul>
-              {extendedNav.slice(3, 6).map((item) => (
+              {mainNav.slice(3, 6).map((item) => (
                 <li key={item.id} className={pathname === item.href ? styles['active'] : ''}>
-                  <Link to={item.href} onClick={() => setIsMobileMenuOpen(false)}>
-                    <item.icon />
-                    <span>{item.title}</span>
-                  </Link>
+                  {item.href === "#" ? (
+                    <div className={styles['nav-item']}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </div>
+                  ) : (
+                    <Link to={item.href} onClick={() => setIsMobileMenuOpen(false)}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

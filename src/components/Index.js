@@ -1,4 +1,5 @@
 export { Button } from './Button/Button'
 export { FilmModal } from './FilmModal/FilmModal'
+export { MovieCard } from './MovieCard/MovieCard'
 export { Sidebar } from './Sidebar/Sidebar'
 export { Slider } from './Slider/Slider'

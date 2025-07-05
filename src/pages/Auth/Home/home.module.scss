@@ -1,34 +1,189 @@
-.category {
-  margin: 20px 0;
-  h1 {
-    font-weight: bold;
-    font-size: 22px;
+.home {
+  padding: 20px;
+  max-width: 100%;
+  
+  @media (max-width: 768px) {
+    padding: 15px;
   }
-  .category--items {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    flex-wrap: wrap;
-    .category--item {
-      margin: 10px 15px;
-      cursor: pointer;
-    &:hover {
-      position: relative;
-    }
-      .category--item_content {
-        img {
-          margin: 15px 0;
-          border-radius: 8px;
-          width: 180px;
-          height: 270px;
-        }
-        h2 {
-          font-weight: bold;
-          font-size: 16px;
-          max-width: 180px;
-        }
-      }
-    }
-    
+  
+  @media (max-width: 480px) {
+    padding: 10px;
   }
 }
+
+.section-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  margin-top: 30px;
+  
+  @media (max-width: 768px) {
+    font-size: 20px;
+    margin-bottom: 15px;
+    margin-top: 25px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 18px;
+    margin-bottom: 12px;
+    margin-top: 20px;
+  }
+}
+
+.hero-section {
+  margin-bottom: 40px;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 30px;
+  }
+  
+  @media (max-width: 480px) {
+    margin-bottom: 25px;
+  }
+}
+
+.recent-section {
+  margin-bottom: 40px;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 30px;
+  }
+  
+  @media (max-width: 480px) {
+    margin-bottom: 25px;
+  }
+}
+
+.all-movies-section {
+  margin-bottom: 40px;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 30px;
+  }
+  
+  @media (max-width: 480px) {
+    margin-bottom: 25px;
+  }
+}
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+  }
+  
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+  }
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: var(--text-secondary);
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--bg-secondary);
+    border-top: 3px solid var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+  }
+  
+  p {
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: var(--error-color);
+  
+  p {
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    max-width: 400px;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Адаптивность для разных размеров экрана
+@media (min-width: 1200px) {
+  .movies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .movies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .movies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .movies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+  }
+}
+
+// Оптимизация для ландшафтной ориентации на мобильных
+@media (max-width: 768px) and (orientation: landscape) {
+  .home {
+    padding: 15px;
+  }
+  
+  .section-title {
+    font-size: 18px;
+    margin-bottom: 12px;
+    margin-top: 20px;
+  }
+  
+  .hero-section,
+  .recent-section,
+  .all-movies-section {
+    margin-bottom: 20px;
+  }
+  
+  .movies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+  }
+}
+
+// Оптимизация для планшетов в портретной ориентации
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: portrait) {
+  .movies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 18px;
+  }
+} 
