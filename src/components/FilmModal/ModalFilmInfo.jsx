@@ -11,7 +11,7 @@ import { Button } from '../Button/Button.jsx'
 import styles from './film-modal.module.scss'
 
 export const ModalFilmInfo = ({ videoRef }) => {
-  const { currentMovie, isFullMovie, updateIsFullMovie } = useMovieStore((state) => state)
+  const { currentMovie, isFullMovie, updateIsFullMovie, lastWatchedMovie, lastWatchedTime } = useMovieStore((state) => state)
 
   const handleFullMovie = () => {
     if (!videoRef.current) return
@@ -24,6 +24,13 @@ export const ModalFilmInfo = ({ videoRef }) => {
     } else {
       updateIsFullMovie(true)
       videoRef.current.src = currentMovie.fullVideo
+      
+      // Устанавливаем сохраненное время, если это тот же фильм
+      if (lastWatchedMovie && lastWatchedMovie.id === currentMovie.id && lastWatchedTime > 0) {
+        videoRef.current.addEventListener('loadedmetadata', () => {
+          videoRef.current.currentTime = lastWatchedTime
+        }, { once: true })
+      }
     }
 
     videoRef.current.play().catch(console.error)

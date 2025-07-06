@@ -6,7 +6,7 @@ import { Loader } from '../Loader/Loader.jsx'
 import styles from './film-modal.module.scss'
 
 export const ModalVideo = ({ isPlaying, isMuted, videoRef, timeUpdate, progress, buffered, updateBuffered, volumeOff }) => {
-  const { currentMovie, isFullMovie } = useMovieStore((state) => state)
+  const { currentMovie, isFullMovie, saveWatchedTime, lastWatchedMovie, lastWatchedTime: savedTime } = useMovieStore((state) => state)
 
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
@@ -22,6 +22,13 @@ export const ModalVideo = ({ isPlaying, isMuted, videoRef, timeUpdate, progress,
     }
   }, [videoRef])
 
+  // Устанавливаем время воспроизведения при загрузке полного фильма
+  useEffect(() => {
+    if (isFullMovie && videoRef.current && lastWatchedMovie && lastWatchedMovie.id === currentMovie.id && savedTime > 0) {
+      videoRef.current.currentTime = savedTime
+    }
+  }, [isFullMovie, currentMovie.id, lastWatchedMovie, savedTime])
+
   const updateCurrentProgress = (e) => {
     //Обновление текущего времени
     timeUpdate(e)
@@ -32,10 +39,23 @@ export const ModalVideo = ({ isPlaying, isMuted, videoRef, timeUpdate, progress,
 
   const fullScreenHandler = () => {
     //Вход и выход (Полноэкранный режим)
-    if (document.fullscreenElement) {
-      document.exitFullscreen()
+    if (document.fullscreenElement || document.webkitFullscreenElement) {
+      // Выход из полноэкранного режима
+      if (document.exitFullscreen) {
+        document.exitFullscreen()
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen()
+      }
     } else {
-      playerRef.current.requestFullscreen()
+      // Вход в полноэкранный режим
+      const element = playerRef.current
+      if (element.requestFullscreen) {
+        element.requestFullscreen()
+      } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen()
+      } else if (element.webkitEnterFullscreen) {
+        element.webkitEnterFullscreen()
+      }
     }
   }
 

@@ -8,7 +8,7 @@ export const useVideoModal = (closeModal, videoRef) => {
   const [isPlaying, setIsPlaying] = useState(false)
   const location = window.location.hostname
 
-  const { updateIsFullMovie } = useMovieStore()
+  const { updateIsFullMovie, currentMovie, isFullMovie, saveWatchedTime } = useMovieStore()
 
   useEffect(() => {
     if (videoRef.current) {
@@ -51,6 +51,10 @@ export const useVideoModal = (closeModal, videoRef) => {
   }
 
   const closeHandler = () => {
+    // Сохраняем время просмотра только если это полный фильм
+    if (isFullMovie && videoRef.current) {
+      saveWatchedTime(currentMovie, videoRef.current.currentTime)
+    }
     closeModal()
     updateIsFullMovie(false)
   }

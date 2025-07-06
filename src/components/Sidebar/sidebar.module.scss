@@ -4,7 +4,7 @@
   position: fixed;
   top: 20px;
   left: 20px;
-  z-index: 1000;
+  z-index: 12;
   background: var(--accent-color);
   color: white;
   padding: 12px;
@@ -32,7 +32,7 @@
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 998;
+  z-index: 10;
   
   @media (max-width: 768px) {
     display: block;
@@ -47,7 +47,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9;
+  z-index: 11;
   display: flex;
   flex-direction: column;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
@@ -104,13 +104,13 @@
       margin-bottom: 30px;
       
       .nav-section--title {
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 600;
-        color: var(--text-secondary);
+        color: rgba(255, 255, 255, 0.8);
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        margin-bottom: 15px;
-        padding: 0 20px;
+        margin: 0 20px 15px;
+        padding: 0;
       }
       
       ul {
@@ -275,6 +275,17 @@
     left: 15px;
     padding: 10px;
   }
+  
+  .nav-section--title {
+    font-size: 13px;
+    margin: 0 0 12px 0;
+  }
+  
+  .nav-section--header {
+    .nav-section--title {
+      font-size: 13px;
+    }
+  }
 }
 
 // Стили для планшетов
@@ -292,7 +303,7 @@
       .nav-section {
         &--title {
           margin: 0 15px 12px;
-          font-size: 10px;
+          font-size: 12px;
         }
         
         ul li a {
@@ -305,6 +316,151 @@
             margin-right: 10px;
           }
         }
+      }
+    }
+  }
+  
+  .nav-section--header {
+    .nav-section--title {
+      font-size: 12px;
+    }
+  }
+}
+
+// Стили для секции "Продолжить просмотр"
+.nav-section--header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding: 0 5px;
+  
+  .nav-section--title {
+    margin: 0 0 15px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .clear-history-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    
+    &:hover {
+      color: #ff4757;
+      background: rgba(255, 71, 87, 0.1);
+    }
+  }
+}
+
+.continue-watching {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  margin: 0 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+  }
+  
+  &--poster {
+    position: relative;
+    width: 50px;
+    height: 75px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-right: 12px;
+    flex-shrink: 0;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .continue-watching--play-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(103, 68, 223, 0.9);
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+  }
+  
+  &:hover &--poster .continue-watching--play-overlay {
+    opacity: 1;
+  }
+  
+  &--info {
+    flex: 1;
+    min-width: 0;
+    
+    h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: white;
+      margin: 0 0 4px 0;
+      line-height: 1.2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    p {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0;
+      line-height: 1.2;
+    }
+  }
+}
+
+// Адаптивные стили для секции "Продолжить просмотр"
+@media (max-width: 768px) {
+  .continue-watching {
+    padding: 10px 15px;
+    margin: 0 8px;
+    
+    &--poster {
+      width: 45px;
+      height: 68px;
+      margin-right: 10px;
+    }
+    
+    &--info {
+      h4 {
+        font-size: 12px;
+      }
+      
+      p {
+        font-size: 10px;
       }
     }
   }

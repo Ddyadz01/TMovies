@@ -33,13 +33,34 @@
 
 .hero-section {
   margin-bottom: 40px;
+  margin-left: -20px;
+  margin-right: -20px;
   
   @media (max-width: 768px) {
     margin-bottom: 30px;
+    margin-left: -15px;
+    margin-right: -15px;
   }
   
   @media (max-width: 480px) {
     margin-bottom: 25px;
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+  
+  // На мобильных делаем слайдер на всю ширину экрана
+  @media (max-width: 768px) {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    
+    // Альтернативный способ для лучшего центрирования
+    @media (max-width: 480px) {
+      margin-left: -10px;
+      margin-right: -10px;
+      width: calc(100% + 20px);
+    }
   }
 }
 
@@ -168,7 +189,14 @@
     margin-top: 20px;
   }
   
-  .hero-section,
+  .hero-section {
+    margin-bottom: 20px;
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+  }
+  
   .recent-section,
   .all-movies-section {
     margin-bottom: 20px;

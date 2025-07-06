@@ -98,7 +98,7 @@ export const Slider = () => {
               key={slide.id}
               style={{ 
                 width: `${slideWidth}px`, 
-                margin: `0 ${slideMargin}px` 
+                margin: `0 ${slideMargin}px`
               }}
             >
               <img 

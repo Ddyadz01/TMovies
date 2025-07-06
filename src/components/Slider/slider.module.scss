@@ -8,11 +8,11 @@
   height: 400px;
   
   @media (max-width: 480px) {
-    height: 200px;
+    height: 280px;
   }
   
   @media (min-width: 481px) and (max-width: 768px) {
-    height: 250px;
+    height: 320px;
   }
   
   @media (min-width: 769px) and (max-width: 1024px) {
@@ -26,7 +26,7 @@
   .slider--btn_prev,
   .slider--btn_next {
     position: absolute;
-    z-index: 1000;
+    z-index: 10;
     top: 50%;
     transform: translateY(-50%);
     width: 48px;
@@ -43,6 +43,20 @@
     border: none;
     outline: none;
     opacity: 0.8;
+    
+    // На мобильных делаем кнопки меньше и полупрозрачными
+    @media (max-width: 768px) {
+      width: 28px;
+      height: 28px;
+      opacity: 0.4;
+      background: rgba(0, 0, 0, 0.2);
+    }
+    
+    @media (max-width: 480px) {
+      width: 24px;
+      height: 24px;
+      opacity: 0.3;
+    }
     
     // Улучшенная доступность
     &:focus-visible {
@@ -78,13 +92,13 @@
     }
     
     @media (max-width: 480px) {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
     }
     
     @media (min-width: 481px) and (max-width: 768px) {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
     }
 
     svg {
@@ -95,14 +109,15 @@
       color: white;
       
       @media (max-width: 480px) {
-        width: 16px;
-        height: 16px;
-        stroke-width: 2px;
+        width: 10px;
+        height: 10px;
+        stroke-width: 1.5px;
       }
       
       @media (min-width: 481px) and (max-width: 768px) {
-        width: 18px;
-        height: 18px;
+        width: 12px;
+        height: 12px;
+        stroke-width: 2px;
       }
     }
     
@@ -111,15 +126,14 @@
       border-color: rgba(255, 255, 255, 0.2);
       transform: translateY(-50%) scale(1.1);
       opacity: 1;
-      
+      animation: buttonFadeIn 0.5s ease-out;
       svg {
         color: var(--accent-color);
         transform: scale(1.1);
       }
     }
     
-    // Анимация появления
-    animation: buttonFadeIn 0.5s ease-out;
+   
     
     // Индикатор загрузки для кнопки
     &::after {
@@ -147,6 +161,14 @@
     left: 10px;
     animation-delay: 0.1s;
     
+    @media (max-width: 480px) {
+      left: 2px;
+    }
+    
+    @media (min-width: 481px) and (max-width: 768px) {
+      left: 3px;
+    }
+    
     svg {
       transform: translateX(-1px);
       
@@ -159,6 +181,14 @@
   .slider--btn_next {
     right: 10px;
     animation-delay: 0.2s;
+    
+    @media (max-width: 480px) {
+      right: 2px;
+    }
+    
+    @media (min-width: 481px) and (max-width: 768px) {
+      right: 3px;
+    }
     
     svg {
       transform: translateX(1px);
@@ -177,13 +207,13 @@
     overflow: hidden;
     
     @media (max-width: 480px) {
-      left: 50px;
-      right: 50px;
+      left: 0;
+      right: 0;
     }
     
     @media (min-width: 481px) and (max-width: 768px) {
-      left: 55px;
-      right: 55px;
+      left: 0;
+      right: 0;
     }
     
     .slider--content {
@@ -202,10 +232,14 @@
         
         @media (max-width: 480px) {
           border-radius: 6px;
+          flex: 0 0 100%; // Занимает всю ширину контейнера
+          width: 100%;
         }
         
         @media (min-width: 481px) and (max-width: 768px) {
           border-radius: 8px;
+          flex: 0 0 100%; // Занимает всю ширину контейнера
+          width: 100%;
         }
         
         &.active {
@@ -323,10 +357,10 @@
 // Оптимизация для ландшафтной ориентации на мобильных
 @media (max-width: 768px) and (orientation: landscape) {
   .slider {
-    height: 180px;
+    height: 200px;
     
     @media (max-width: 480px) {
-      height: 150px;
+      height: 180px;
     }
   }
 }

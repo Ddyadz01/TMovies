@@ -5,7 +5,13 @@ import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 // Icons
-import { HomeIcon, TrendingUp, Search, Heart, Clock, Settings, Menu, X } from 'lucide-react'
+import { HomeIcon, TrendingUp, Search, Heart, Clock, Settings, Menu, X, Play } from 'lucide-react'
+
+// Store
+import { useMovieStore } from '../../store/store.js'
+
+// Utils
+import { FormatSeconds } from '../../utils/SecondsFormat.jsx'
 
 // Constants
 import { NAV } from '../../../constants.jsx'
@@ -16,6 +22,7 @@ import styles from './sidebar.module.scss'
 export const Sidebar = () => {
   const { pathname } = useLocation()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { lastWatchedMovie, lastWatchedTime, openModal, updateCurrentMovie, clearLastWatched } = useMovieStore()
 
   // Основная навигация
   const mainNav = [
@@ -59,6 +66,17 @@ export const Sidebar = () => {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
+
+  const continueWatching = () => {
+    if (lastWatchedMovie) {
+      updateCurrentMovie(lastWatchedMovie)
+      openModal()
+    }
+  }
+
+  const handleClearHistory = () => {
+    clearLastWatched()
   }
 
   return (
@@ -117,6 +135,34 @@ export const Sidebar = () => {
               ))}
             </ul>
           </div>
+
+          {/* Секция "Продолжить просмотр" */}
+          {lastWatchedMovie && (
+            <div className={styles['nav-section']}>
+              <div className={styles['nav-section--header']}>
+                <h3 className={styles['nav-section--title']}>Продолжить просмотр</h3>
+                <button 
+                  className={styles['clear-history-btn']} 
+                  onClick={handleClearHistory}
+                  title="Очистить историю"
+                >
+                  ×
+                </button>
+              </div>
+              <div className={styles['continue-watching']} onClick={continueWatching}>
+                <div className={styles['continue-watching--poster']}>
+                  <img src={lastWatchedMovie.posterUrl} alt={lastWatchedMovie.title} />
+                  <div className={styles['continue-watching--play-overlay']}>
+                    <Play size={20} />
+                  </div>
+                </div>
+                <div className={styles['continue-watching--info']}>
+                  <h4>{lastWatchedMovie.title}</h4>
+                  <p>Остановились на {FormatSeconds(lastWatchedTime)}</p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className={styles['sidebar--footer']}>
