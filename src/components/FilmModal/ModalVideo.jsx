@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Expand, PauseIcon, PlayIcon, Volume2Icon, VolumeOff } from 'lucide-react'
+import { Expand, PauseIcon, PlayIcon, Volume2Icon, VolumeOff, RotateCcw } from 'lucide-react'
 import { useMovieStore } from '../../store/store.js'
 import { FormatSeconds } from '../../utils/SecondsFormat.jsx'
 import { Loader } from '../Loader/Loader.jsx'
@@ -91,6 +91,21 @@ export const ModalVideo = ({ isPlaying, isMuted, videoRef, timeUpdate, progress,
     videoRef.current.currentTime = currentMoveTime
   }
 
+  const togglePlay = () => {
+    if (videoRef.current.paused) {
+      videoRef.current.play()
+    } else {
+      videoRef.current.pause()
+    }
+  }
+
+  const restartVideo = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0
+      videoRef.current.play()
+    }
+  }
+
   return (
     <div className={styles['film--modal__video']} ref={playerRef}>
       <video
@@ -108,72 +123,74 @@ export const ModalVideo = ({ isPlaying, isMuted, videoRef, timeUpdate, progress,
             setDuration(formatedTime)
           }
         }}
-      ></video>
+      />
+      
+      {/* Видео оверлей */}
+      <div className={styles['video-overlay']} />
+      
+      {/* Лоадер */}
       {!isPlaying && <Loader />}
-      {isFullMovie ? (
-        <div className={styles['player']}>
-          {videoRef.current?.paused ? (
-            <PlayIcon className={styles['player--icon']} onClick={() => videoRef.current.play()} />
-          ) : (
-            <PauseIcon
-              className={styles['player--icon']}
-              onClick={() => videoRef.current.pause()}
-            />
-          )}
-          <div className={styles['player--content']}>
-            <span>{currentTime}</span>
-            <div
-              className={styles['player--progress']}
-              onClick={progressClick}
-              onMouseMove={onMouseMove}
-              onMouseOut={onMouseOut}
-            >
-              <span
-                style={{
-                  left: procent + '%',
-                  display: procent == 0 ? 'none' : 'block',
-                }}
-              >
-                {currentPointerTime}
-              </span>
-              <div
-                className={styles['player--progress_buffered']}
-                style={{ width: buffered + '%' }}
-              ></div>
-              <div
-                className={styles['player--progress_bar']}
-                style={{ width: progress + '%' }}
-              ></div>
-            </div>
-            <span>{duration}</span>
-          </div>
-          {isFullMovie ? (
-            isMuted ? (
-              <VolumeOff onClick={volumeOff} />
-            ) : (
-              <Volume2Icon onClick={volumeOff} />
-            )
-          ) : (
-            ''
-          )}
-          <Expand onClick={fullScreenHandler} />
-        </div>
-      ) : (
-        <div className={styles['progress-container']}>
-          <div className={styles['progress-buffered']} style={{ width: buffered + '%' }}></div>
-          <div className={styles['progress']} style={{ width: progress + '%' }}></div>
+      
+      {/* Кнопка повтора */}
+      {videoRef.current?.ended && (
+        <div className={styles['repeat']} onClick={restartVideo}>
+          <RotateCcw />
         </div>
       )}
-      <div className={styles['film--modal__video-footer']}>
-        {!isFullMovie ? (
-          isMuted ? (
-            <VolumeOff onClick={volumeOff} />
-          ) : (
-            <Volume2Icon onClick={volumeOff} />
-          )
-        ) : (
-          ''
-        )}
+      
+      {/* Плеер */}
+      <div className={styles['player']}>
+        <div className={styles['player--content']}>
+          {/* Кнопка воспроизведения/паузы */}
+          <div className={styles['player--icon']} onClick={togglePlay}>
+            {videoRef.current?.paused ? (
+              <PlayIcon />
+            ) : (
+              <PauseIcon />
+            )}
+          </div>
+          
+          {/* Время */}
+          <div className={styles['time-display']}>
+            {currentTime}
+          </div>
+          
+          {/* Прогресс бар */}
+          <div
+            className={styles['player--progress']}
+            onClick={progressClick}
+            onMouseMove={onMouseMove}
+            onMouseOut={onMouseOut}
+          >
+            <div
+              className={styles['player--progress_buffered']}
+              style={{ width: buffered + '%' }}
+            />
+            <div
+              className={styles['player--progress_bar']}
+              style={{ width: progress + '%' }}
+            />
+          </div>
+          
+          {/* Общая длительность */}
+          <div className={styles['time-display']}>
+            {duration}
+          </div>
+          
+          {/* Управление звуком */}
+          <div className={styles['volume-control']} onClick={volumeOff}>
+            {isMuted ? (
+              <VolumeOff />
+            ) : (
+              <Volume2Icon />
+            )}
+          </div>
+          
+          {/* Полноэкранный режим */}
+          <div className={styles['volume-control']} onClick={fullScreenHandler}>
+            <Expand />
+          </div>
+        </div>
       </div>
     </div>
   )

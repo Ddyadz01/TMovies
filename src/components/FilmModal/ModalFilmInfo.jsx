@@ -1,11 +1,8 @@
 // Icons
-import { MonitorPlay } from 'lucide-react'
+import { MonitorPlay, Clock, Calendar, MapPin, Star, Play } from 'lucide-react'
 
 // Store
 import { useMovieStore } from '../../store/store.js'
-
-// Components
-import { Button } from '../Button/Button.jsx'
 
 // Styles
 import styles from './film-modal.module.scss'
@@ -38,29 +35,73 @@ export const ModalFilmInfo = ({ videoRef }) => {
 
   return (
     <div className={styles['film--modal__info']}>
+      {/* Заголовок */}
       <div className={styles['film--modal__title']}>
         <h1>{currentMovie.title}</h1>
       </div>
-      <div className={styles['film--modal__more']}>
-        <div className={styles['film--modal__ganres']}>
-          {currentMovie.ganres?.map((ganre, idx) => (
-            <p key={idx}>
-              {ganre} {idx + 1 !== currentMovie.ganres.length && '∙'}
-            </p>
-          ))}
+      
+      {/* Мета информация */}
+      <div className={styles['film--modal__meta']}>
+        <div className={styles['meta-item']}>
+          <Calendar size={16} />
+          <span>{currentMovie.year}</span>
         </div>
-        <div className={styles['film--modal__country']}>
-          {currentMovie.country + ' ∙ ' + currentMovie.year + ' ∙ '}
-          <div className={styles['film--modal__age']}>{currentMovie.minAge + ' +'}</div>
+        <div className={styles['meta-item']}>
+          <Clock size={16} />
+          <span>{currentMovie.duration}</span>
         </div>
-        <Button clickFn={handleFullMovie}>
-          <MonitorPlay />
+        <div className={styles['meta-item']}>
+          <MapPin size={16} />
+          <span>{currentMovie.country}</span>
+        </div>
+        {currentMovie.rating && (
+          <div className={styles['meta-item']}>
+            <Star size={16} />
+            <span>{currentMovie.rating}</span>
+          </div>
+        )}
+        <div className={styles['age-rating']}>
+          {currentMovie.minAge}+
+        </div>
+      </div>
+      
+      {/* Жанры */}
+      <div className={styles['film--modal__genres']}>
+        {currentMovie.ganres?.map((ganre, idx) => (
+          <span key={idx} className={styles['genre-tag']}>
+            {ganre}
+          </span>
+        ))}
+      </div>
+      
+      {/* Описание */}
+      <div className={styles['film--modal__description']}>
+        <h2>Описание</h2>
+        <p>{currentMovie.description}</p>
+        
+        {/* Продолжительность полного фильма */}
+        {currentMovie.fullDuration && (
+          <div className={styles['full-duration']}>
+            <Clock size={16} />
+            <span>Полная продолжительность: {currentMovie.fullDuration}</span>
+          </div>
+        )}
+      </div>
+      
+      {/* Кнопки действий */}
+      <div className={styles['film--modal__actions']}>
+        <button 
+          className={styles['primary']} 
+          onClick={handleFullMovie}
+        >
+          {isFullMovie ? <MonitorPlay size={18} /> : <Play size={18} />}
           {isFullMovie ? 'Смотреть трейлер' : 'Смотреть фильм'}
-        </Button>
-        <div className={styles['film--modal__description']}>
-          <h1>Описание</h1>
-          {currentMovie.description}
-        </div>
+        </button>
+        
+        <button className={styles['secondary']}>
+          <Star size={18} />
+          В избранное
+        </button>
       </div>
     </div>
   )

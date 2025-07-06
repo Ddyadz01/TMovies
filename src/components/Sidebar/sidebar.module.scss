@@ -5,15 +5,17 @@
   top: 20px;
   left: 20px;
   z-index: 12;
-  background: var(--accent-color);
-  color: white;
+  background: var(--accent-primary);
+  color: var(--text-primary);
   padding: 12px;
   border-radius: 8px;
   cursor: pointer;
   transition: 0.3s;
+  box-shadow: var(--shadow-medium);
   
   &:hover {
-    background: #5a3bc7;
+    background: var(--hover-color);
+    transform: scale(1.05);
   }
   
   @media (max-width: 768px) {
@@ -42,7 +44,7 @@
 .sidebar {
   width: 280px;
   height: 100vh;
-  background: linear-gradient(180deg, #0f102a 0%, #1a1b3a 100%);
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
   padding: 0;
   position: fixed;
   top: 0;
@@ -50,8 +52,9 @@
   z-index: 11;
   display: flex;
   flex-direction: column;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-heavy);
   transition: transform 0.3s ease-in-out;
+  border-right: 1px solid var(--border-color);
   
   @media (max-width: 768px) {
     transform: translateX(-100%);
@@ -81,7 +84,7 @@
       font-size: 32px;
       font-weight: bold;
       margin: 0 0 5px 0;
-      color: var(--accent-color);
+      color: var(--accent-primary);
       text-shadow: 0 0 10px rgba(103, 68, 223, 0.3);
     }
     
@@ -145,18 +148,18 @@
             }
             
             &:hover {
-              background: var(--bg-hover);
-              color: var(--accent-color);
+              background: var(--bg-tertiary);
+              color: var(--accent-primary);
             }
           }
           
           &.active {
             a {
-              background: var(--accent-color);
-              color: white;
+              background: var(--accent-primary);
+              color: var(--text-primary);
               
               &:hover {
-                background: var(--accent-hover);
+                background: var(--hover-color);
               }
             }
           }
@@ -228,7 +231,7 @@
 
 // Скроллбар для навигации
 .sidebar--nav::-webkit-scrollbar {
-  width: 4px;
+  width: 3px;
 }
 
 .sidebar--nav::-webkit-scrollbar-track {
@@ -360,8 +363,8 @@
     margin-bottom: 15px;
     
     &:hover {
-      color: #ff4757;
-      background: rgba(255, 71, 87, 0.1);
+      color: var(--accent-primary);
+      background: rgba(103, 68, 223, 0.1);
     }
   }
 }

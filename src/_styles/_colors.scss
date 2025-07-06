@@ -1,6 +1,38 @@
 :root {
-  --bg-color: #03041a;
-  --white-text-color: white;
-  --accent-color: #6744df;
-  --text-blue-color: #a7a1ff;
+  // Основные цвета фона (фиолетовые в гамме #6744df)
+  --bg-primary: #0f0a1a;        // Очень темный фиолетовый
+  --bg-secondary: #1a0f2e;      // Темно-фиолетовый для карточек
+  --bg-tertiary: #2a1a42;       // Средний фиолетовый для элементов
+  
+  // Цвета текста
+  --text-primary: #ffffff;      // Основной белый текст
+  --text-secondary: #e6e0f0;    // Светло-фиолетовый текст
+  --text-muted: #b8a8d8;        // Приглушенный фиолетовый текст
+  
+  // Акцентные цвета (изначальный фиолетовый)
+  --accent-primary: #6744df;    // Фиолетовый акцент
+  --accent-secondary: #5a3bc7;  // Темно-фиолетовый
+  --accent-color: #6744df;      // Основной акцентный цвет
+  --accent-success: #00d474;    // Зеленый для успеха
+  --accent-warning: #ffa500;    // Оранжевый для предупреждений
+  
+  // Градиенты
+  --gradient-primary: linear-gradient(135deg, #6744df 0%, #5a3bc7 100%);
+  --gradient-secondary: linear-gradient(135deg, #2a1a42 0%, #1a0f2e 100%);
+  --gradient-overlay: linear-gradient(135deg, rgba(15, 10, 26, 0.8) 0%, rgba(15, 10, 26, 0.4) 50%, rgba(15, 10, 26, 0.9) 100%);
+  
+  // Тени
+  --shadow-light: 0 2px 8px rgba(15, 10, 26, 0.1);
+  --shadow-medium: 0 4px 16px rgba(15, 10, 26, 0.15);
+  --shadow-heavy: 0 8px 32px rgba(15, 10, 26, 0.2);
+  
+  // Прозрачности
+  --overlay-light: rgba(15, 10, 26, 0.3);
+  --overlay-medium: rgba(15, 10, 26, 0.6);
+  --overlay-heavy: rgba(15, 10, 26, 0.8);
+  
+  // Специальные цвета
+  --border-color: #3a2a52;
+  --hover-color: #7a52f0;
+  --focus-color: #8b5cf6;
 }
