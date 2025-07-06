@@ -46,8 +46,8 @@ export const FILMSLIST = [
   {
     id: 1,
     title: "Граф Монте-Кристо",
-    minAge: "16",
-    trailerUrl: "/videos/1.mp4",
+    minAge: "16", 
+    trailerUrl: "https://player.vimeo.com/video/148751763?badge=0&autopause=0&player_id=0&app_id=58479",
     fullVideo: "/videos/full5.mp4",
     year: 2025,
     country: "Франция",

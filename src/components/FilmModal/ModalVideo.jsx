@@ -93,23 +93,37 @@ export const ModalVideo = ({ isPlaying, isMuted, videoRef, timeUpdate, progress,
 
   return (
     <div className={styles['film--modal__video']} ref={playerRef}>
-      <video
-        style={isPlaying ? {} : { background: 'black' }}
-        muted={isMuted}
-        playsInline={true}
-        ref={videoRef}
-        src={currentMovie.trailerUrl}
-        onTimeUpdate={updateCurrentProgress}
-        onProgress={updateBuffered}
-        onCanPlay={updateBuffered}
-        onLoadedMetadata={() => {
-          if (videoRef.current) {
-            const formatedTime = FormatSeconds(videoRef.current.duration)
-            setDuration(formatedTime)
-          }
-        }}
-      ></video>
-      {!isPlaying && <Loader />}
+      {currentMovie.trailerUrl.includes('vimeo.com') ? (
+        <iframe
+          src={currentMovie.trailerUrl}
+          frameBorder="0"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowFullScreen
+          style={{ 
+            width: '100%', 
+            height: '100%',
+            background: 'black'
+          }}
+        />
+      ) : (
+        <video
+          style={isPlaying ? {} : { background: 'black' }}
+          muted={isMuted}
+          playsInline={true}
+          ref={videoRef}
+          src={currentMovie.trailerUrl}
+          onTimeUpdate={updateCurrentProgress}
+          onProgress={updateBuffered}
+          onCanPlay={updateBuffered}
+          onLoadedMetadata={() => {
+            if (videoRef.current) {
+              const formatedTime = FormatSeconds(videoRef.current.duration)
+              setDuration(formatedTime)
+            }
+          }}
+        />
+      )}
+      {!isPlaying && !currentMovie.trailerUrl.includes('vimeo.com') && <Loader />}
       {isFullMovie ? (
         <div className={styles['player']}>
           {videoRef.current?.paused ? (
